@@ -1,0 +1,19 @@
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(000, 000, 000, 0.2);
+  z-index: 999;
+  overflow: hidden;
+}
+.overlay .icon{  
+  width: 56rpx;
+  height: 56rpx;
+}

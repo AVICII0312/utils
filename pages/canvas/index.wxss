@@ -1,0 +1,33 @@
+page {
+  box-sizing: border-box;
+}
+
+.canvas {
+  width: 100%;
+  height: 100vh;
+}
+
+.btn_container {
+  position: fixed;
+  bottom: 100rpx;
+  padding: 0 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.btn_container .btn {
+  padding: 20rpx 120rpx;
+  font-size: 30rpx;
+  border-radius: 30rpx;
+}
+
+.btn_container .btn.remove {
+  background: #FF9502;
+}
+
+.btn_container .btn.confirm {
+  background: #5AC8FA;
+}

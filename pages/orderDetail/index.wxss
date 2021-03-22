@@ -1,0 +1,87 @@
+page {
+  padding: 30rpx 40rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.section {
+  margin-bottom: 20rpx;
+  box-shadow: 0 4rpx 12rpx 0 rgba(000, 000, 000, .4);
+
+}
+
+.section .van-collapse-item__content {
+  padding: 30rpx 0;
+}
+
+.title {
+  background: red;
+}
+
+.row {
+  padding: 0 30rpx;
+  display: flex;
+  align-items: center;
+  height: 60rpx;
+}
+
+.row:nth-child(odd) {
+  background: #FBFBFB;
+}
+
+.row .label {
+  display: flex;
+  width: 180rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 24rpx;
+  color: #101010;
+}
+
+.row .badge {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+  color: #FF2D55;
+}
+
+.row .value {
+  padding-left: 14rpx;
+  width: 350rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 24rpx;
+  border: 2rpx solid #D9D9D9;
+  border-radius: 10rpx;
+  color: #101010;
+}
+
+.van-collapse-item__title .van-cell {
+  font-size: 28rpx;
+  color: #fff;
+  background: #5AC8FA !important;
+}
+
+.van-collapse-item__title .van-cell .item-index--van-cell__right-icon {
+  color: #fff;
+}
+
+.btn {
+  margin: 120rpx auto 0;
+  width: 330rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  border-radius: 30rpx;
+  background: #007AFF;
+
+}
+
+.video_play {
+  margin-left: 30rpx;
+  padding: 36rpx 80rpx;
+  width: 48rpx;
+  height: 48rpx;
+  border: 2rpx solid #BBBBBB;
+}

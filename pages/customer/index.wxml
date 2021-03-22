@@ -1,0 +1,17 @@
+<van-search value="{{ value }}" placeholder="请输入搜索关键词" custom-class="background" field-class="search_background" />
+<navigator class="section" hover-class="none" wx:for="{{list}}" url="/pages/addUser/index?type=check&&id={{item.id}}">
+  <view class="left">
+    <view class="head">
+      <view class="text">{{item.cusName}}</view>
+      <view class="text">{{item.phone}}</view>
+    </view>
+    <view class="detail">{{item.address}}</view>
+  </view>
+  <view class="right" wx:if="{{item.checkState==1}}" data-id="{{item.id}}" catchtap="navigateTo">
+    修改
+  </view>
+</navigator>
+<navigator class="btn" hover-class="none" url="/pages/addUser/index?add=true">
+  新增
+</navigator>
+<tab-bar selected="{{2}}" />

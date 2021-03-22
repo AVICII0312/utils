@@ -1,0 +1,325 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="相关信息" name="1">
+      <view class="row">
+        <view class="label">人口数：</view>
+        <input class="value" placeholder="请输入人口数" data-tag="iHumNum" value="{{iHumNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">采集面积：</view>
+        <input class="value" placeholder="请输入面积" data-tag="iAcreage" value="{{iAcreage}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">用户类型：</view>
+        <picker mode="selector" value="{{iSecurityType}}" range="{{security_typeArr}}" range-key="dictNm" data-tag="iSecurityType" data-name="iSecurityTypeNm" data-range="security_typeArr" bindchange="selectChange">
+          <view class="value">{{iSecurityTypeNm.length?iSecurityTypeNm:'请选择用户类型'}}</view>
+        </picker>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="section">
+    <van-collapse-item title="置换单" name="2">
+      <view class="row">
+        <view class="row_title">安全检查</view>
+      </view>
+      <view class="row">
+        <view class="label">管道情况：</view>
+        <van-radio-group value="{{ iTubeState }}" data-tag="iTubeState" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iTubeState }}" name="0">
+            <image slot="icon" src="{{ iTubeState == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">封闭</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iTubeState }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iTubeState == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无封闭</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label">与插座距离：</view>
+        <van-radio-group value="{{ iIsDistanceQuality }}" data-tag="iIsDistanceQuality" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsDistanceQuality }}" name="0">
+            <image slot="icon" src="{{ iIsDistanceQuality == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">合格</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsDistanceQuality }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsDistanceQuality == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">不合格</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label">管道防腐质量：</view>
+        <van-radio-group value="{{ iIsCorrodeQuality }}" data-tag="iIsCorrodeQuality" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsCorrodeQuality }}" name="0">
+            <image slot="icon" src="{{ iIsCorrodeQuality == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">合格</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsCorrodeQuality }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsCorrodeQuality == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">不合格</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="row_title">灶具</view>
+      </view>
+      <view class="row">
+        <view class="label">是否有灶具：</view>
+        <van-radio-group value="{{ iIsUtensils }}" data-tag="iIsUtensils" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsUtensils }}" name="0">
+            <image slot="icon" src="{{ iIsUtensils == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsUtensils }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsUtensils == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <block wx:if="{{iIsUtensils == 0}}">
+        <view class="row add">
+          <view class="label">安装方式：</view>
+          <picker mode="selector" value="{{iUtensilsInstallType}}" range="{{utensils_install_typeArr}}" range-key="dictNm" data-tag="iUtensilsInstallType" data-name="iUtensilsInstallTypeNm" data-range="utensils_install_typeArr" bindchange="selectChange">
+            <view class="value">
+              {{iUtensilsInstallTypeNm.length?iUtensilsInstallTypeNm:'请选择安装方式'}}
+            </view>
+          </picker>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">熄火保护：</view>
+          <van-radio-group value="{{ iIsFreeProtect }}" data-tag="iIsFreeProtect" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ iIsFreeProtect }}" name="0">
+              <image slot="icon" src="{{ iIsFreeProtect == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">有</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ iIsFreeProtect }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ iIsFreeProtect == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">无</view>
+            </van-radio>
+          </van-radio-group>
+        </view>
+        <view class="row add">
+          <view class="label">气源是否匹配：</view>
+          <van-radio-group value="{{ iIsGasSource }}" data-tag="iIsGasSource" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ iIsGasSource }}" name="0">
+              <image slot="icon" src="{{ iIsGasSource == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">是</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ iIsGasSource }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ iIsGasSource == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">否</view>
+            </van-radio>
+          </van-radio-group>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">软管保护：</view>
+          <van-radio-group value="{{ iIsTubeQuality }}" data-tag="iIsTubeQuality" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ iIsTubeQuality }}" name="0">
+              <image slot="icon" src="{{ iIsTubeQuality == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">是</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ iIsTubeQuality }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ iIsTubeQuality == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">否</view>
+            </van-radio>
+          </van-radio-group>
+        </view>
+        <view class="row add">
+          <view class="label">品牌：</view>
+          <input class="value" placeholder="请输入品牌" data-tag="iUtensilsName" value="{{iUtensilsName}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label">生产日期：</view>
+          <picker mode="date" value="{{iUtensilsTime}}" data-tag="iUtensilsTime" bindchange="bindChange">
+            <view class="value">{{iUtensilsTime?iUtensilsTime:'请输入生产日期'}}</view>
+          </picker>
+        </view>
+      </block>
+      <view class="row">
+        <view class="row_title">壁挂炉</view>
+      </view>
+      <view class="row">
+        <view class="label">是否有壁挂炉：</view>
+        <van-radio-group value="{{ iIsStove }}" data-tag="iIsStove" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsStove }}" name="0">
+            <image slot="icon" src="{{ iIsStove == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsStove }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsStove == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <block wx:if="{{iIsStove == 0}}">
+        <view class="row add">
+          <view class="label">排烟方式：</view>
+          <picker mode="selector" value="{{iStoveEjectSmoke}}" range="{{stove_eject_smokeArr}}" range-key="dictNm" data-tag="iStoveEjectSmoke" data-name="iStoveEjectSmokeNm" data-range="stove_eject_smokeArr" bindchange="selectChange">
+            <view class="value">{{iStoveEjectSmokeNm.length?iStoveEjectSmokeNm:'请选择排烟方式'}}</view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">品牌：</view>
+          <input class="value" placeholder="请输入品牌" data-tag="iStoveName" value="{{iStoveName}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label">生产日期：</view>
+          <picker mode="date" value="{{iStoveTime}}" data-tag="iStoveTime" bindchange="bindChange">
+            <view class="value">{{iStoveTime?iStoveTime:'请输入生产日期'}}</view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">拍照：</view>
+          <view class="img_group">
+            <image src="{{iStoveImgPathPreview}}" class="img" data-preview="{{iStoveImgPathPreview}}" bindtap="preview" wx:if="{{iStoveImgPathPreview}}" />
+            <image src="{{imgUrl+iStoveImgPath}}" class="img" data-preview="{{imgUrl+iStoveImgPath}}" bindtap="preview" wx:elif="{{iStoveImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="iStoveImgPathPreview" data-tag="iStoveImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <view class="row">
+        <view class="row_title">热水器</view>
+      </view>
+      <view class="row">
+        <view class="label">是否有热水器：</view>
+        <van-radio-group value="{{ iIsHotWater }}" data-tag="iIsHotWater" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsHotWater }}" name="0">
+            <image slot="icon" src="{{ iIsHotWater == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsHotWater }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsHotWater == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <block wx:if="{{iIsHotWater == 0}}">
+        <view class="row add">
+          <view class="label">安装位置：</view>
+          <picker mode="selector" value="{{iHotWaterPlace}}" range="{{hot_water_placeArr}}" range-key="dictNm" data-tag="iHotWaterPlace" data-name="iHotWaterPlaceNm" data-range="hot_water_placeArr" bindchange="selectChange">
+            <view class="value">{{iHotWaterPlaceNm.length?iHotWaterPlaceNm:'请选择安装位置'}}</view>
+          </picker>
+        </view>
+      </block>
+      <view class="row">
+        <view class="row_title">户内管</view>
+      </view>
+      <view class="row">
+        <view class="label">户内管位置：</view>
+        <picker mode="selector" value="{{iIndoorTubeType}}" range="{{indoor_tube_typeArr}}" range-key="dictNm" data-tag="iIndoorTubeType" data-name="iIndoorTubeTypeNm" data-range="indoor_tube_typeArr" bindchange="selectChange">
+          <view class="value">{{iIndoorTubeTypeNm.length?iIndoorTubeTypeNm:'请选择户内管位置'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <view class="row ">
+        <view class="label">表前阀：</view>
+        <van-radio-group value="{{ iIsBeforeValve }}" data-tag="iIsBeforeValve" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsBeforeValve }}" name="0">
+            <image slot="icon" src="{{ iIsBeforeValve == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">正常</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsBeforeValve }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsBeforeValve == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">不正常</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row ">
+        <view class="label">户内管管卡：</view>
+        <van-radio-group value="{{ iIndoorPipeStrap }}" data-tag="iIndoorPipeStrap" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIndoorPipeStrap }}" name="0">
+            <image slot="icon" src="{{ iIndoorPipeStrap == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">合格</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIndoorPipeStrap }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIndoorPipeStrap == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">不合格</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label">户内管全貌：</view>
+        <image class="icon" src="../../assets/images/video.svg" data-tag="iPipeImgPath" data-preview="iPipeImgPathPreview" bindtap="takeVideo" />
+      </view>
+      <view class="row" style="height:100%">
+        <video src="{{iPipeImgPathPreview}}" class="video_play" wx:if="{{iPipeImgPathPreview.length}}"></video>
+        <video src="{{imgUrl+iPipeImgPath}}" class="video_play" wx:elif="{{iPipeImgPath.length}}"></video>
+        <image class="video_play" src="../../assets/images/video_play.svg" bindtap="preViewVideo" wx:else />
+      </view>
+      <view class="row">
+        <view class="row_title">报警器</view>
+      </view>
+      <view class="row ">
+        <view class="label">泄漏报警器：</view>
+        <van-radio-group value="{{ iIsSiren }}" data-tag="iIsSiren" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsSiren }}" name="0">
+            <image slot="icon" src="{{ iIsSiren == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsSiren }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsSiren == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+        <view class="badge">*</view>
+      </view>
+      <view class="row ">
+        <view class="label">报警器切断：</view>
+        <van-radio-group value="{{ iIsValve }}" data-tag="iIsValve" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ iIsValve }}" name="0">
+            <image slot="icon" src="{{ iIsValve == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ iIsValve }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ iIsValve == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">切断阀拍照：</view>
+        <view class="img_group">
+          <image src="{{iValveImgPathPreview}}" class="img" data-preview="{{iValveImgPathPreview}}" bindtap="preview" wx:if="{{iValveImgPathPreview}}" />
+          <image src="{{imgUrl+iValveImgPath}}" class="img" data-preview="{{imgUrl+iValveImgPath}}" bindtap="preview" wx:elif="{{iValveImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="iValveImgPathPreview" data-tag="iValveImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="row_title">影像信息</view>
+      </view>
+      <view class="row">
+        <view class="label">拍照留存：</view>
+        <view class="img_group">
+          <image src="{{iImgPathPreview}}" class="img" data-preview="{{iImgPathPreview}}" bindtap="preview" wx:if="{{iImgPathPreview}}" />
+          <image src="{{imgUrl+iImgPath}}" class="img" data-preview="{{imgUrl+iImgPath}}" bindtap="preview" wx:elif="{{iImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="iImgPathPreview" data-tag="iImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">置换点火单：</view>
+        <view class="img_group">
+          <image src="{{iBillsImgPathPreview}}" class="img" data-preview="{{iBillsImgPathPreview}}" bindtap="preview" wx:if="{{iBillsImgPathPreview}}" />
+          <image src="{{imgUrl+iBillsImgPath}}" class="img" data-preview="{{imgUrl+iBillsImgPath}}" bindtap="preview" wx:elif="{{iBillsImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="iBillsImgPathPreview" data-tag="iBillsImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="btn_container">
+   <view class="btn save" data-tag="save" bindtap="submitOrder" wx:if="{{nextStep}}">下一步</view>
+    <block wx:else>
+      <view class="btn save" data-tag="save" bindtap="submitOrder">暂存工单</view>
+      <view class="btn" data-tag="submit" bindtap="submitOrder">提交工单</view>
+    </block>
+  </view>
+</van-collapse>

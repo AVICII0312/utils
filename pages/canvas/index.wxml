@@ -1,0 +1,7 @@
+<canvas canvas-id="sign" class="canvas" disable-scroll="{{true}}" bindtouchstart="drawStart" bindtouchmove="drawChange"
+  bindtouchend="drawEnd">
+  <cover-view class="btn_container">
+    <cover-view class="btn remove" bindtap="removeCanvas">清屏</cover-view>
+    <cover-view class="btn confirm"bindtap="confirm">确定</cover-view>
+  </cover-view>
+</canvas>

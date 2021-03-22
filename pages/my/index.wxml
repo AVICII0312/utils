@@ -1,0 +1,40 @@
+<view class="head">
+  <image class="img" src="../../assets/images/order_img2.png" />
+  <view class="name">{{nickname}}</view>
+</view>
+<view class="main">
+  <view class="row">
+    <view class="title">
+      <image src="../../assets/icon/phone_my.png" class="icon" />
+      <view>手机号码</view>
+    </view>
+    <view class="info">{{phone}}</view>
+  </view>
+  <view class="row">
+    <view class="title">
+      <image src="../../assets/icon/email.png" class="icon" />
+      <view>账户名</view>
+    </view>
+    <view class="info">{{username}}</view>
+  </view>
+  <view class="row">
+    <view class="title">
+      <image src="../../assets/icon/job_icon.svg" class="icon" />
+      <view>性别</view>
+    </view>
+    <view class="info">{{sexNm}}</view>
+  </view>
+  <view class="row">
+    <view class="title">
+      <image src="../../assets/icon/organization.png" class="icon" />
+      <view>所属机构</view>
+    </view>
+    <view class="info">{{orgName}}</view>
+  </view>
+</view>
+<view class="btn">
+  <van-button custom-class="button" type="info" size="large" icon="../../assets/icon/quit.png" bindtap="signOut">退出账号
+  </van-button>
+</view>
+
+<tab-bar selected="{{3}}" />

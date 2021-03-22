@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "零星工单",
+  "usingComponents": {
+    "van-collapse": "/component/collapse/index",
+    "van-collapse-item": "/component/collapse-item/index",
+    "van-radio": "/component/radio/index",
+    "van-radio-group": "/component/radio-group/index",
+    "van-popup": "/component/popup/index",
+    "van-checkbox": "/component/checkbox/index",
+    "van-checkbox-group": "/component/checkbox-group/index",
+    "van-cell": "/component/cell/index",
+    "van-cell-group": "/component/cell-group/index"
+  }
+  
+}

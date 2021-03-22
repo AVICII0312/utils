@@ -1,0 +1,238 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="用户信息" name="1">
+      <view class="row">
+        <view class="label">客户名称：</view>
+        <input class="value" placeholder="请输入客户名称" data-tag="cusName" value="{{cusName}}" maxlength="50"
+          disabled="{{type}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">客户地址：</view>
+        <input class="value" placeholder="请输入客户地址" maxlength="300" data-tag="address" value="{{address}}"
+          bindinput="inputChange" disabled="{{type}}" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">客户编号：</view>
+        <input class="value" placeholder="请输入客户编号" maxlength="50" data-tag="cusNum" value="{{cusNum}}"
+          bindinput="inputChange" disabled="{{type}}" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">装表日期：</view>
+        <picker mode="date" value="{{installTime}}" disabled="{{type}}" data-tag="installTime" bindchange="bindChange">
+          <view class="value">{{installTime?installTime:'请选择装表日期'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">点火日期：</view>
+        <picker mode="date" value="{{fireTime}}" disabled="{{type}}" data-tag="fireTime" bindchange="bindChange">
+          <view class="value">{{fireTime?fireTime:'请选择点火日期'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">换表日期：</view>
+        <picker mode="date" value="{{changeTime}}" disabled="{{type}}" data-tag="changeTime" bindchange="bindChange">
+          <view class="value">{{changeTime?changeTime:'请选择换表日期'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">联系人：</view>
+        <input class="value" placeholder="请输入联系人" disabled="{{type}}" maxlength="50" data-tag="linkman"
+          value="{{linkman}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">移动电话：</view>
+        <input class="value" placeholder="请输入移动电话" disabled="{{type}}" maxlength="50" data-tag="phone" value="{{phone}}"
+          bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">联系电话2：</view>
+        <input class="value" placeholder="请输入联系电话2" disabled="{{type}}" maxlength="50" data-tag="phone1"
+          value="{{phone1}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">所属片区：</view>
+        <picker mode="selector" value="{{districtId}}" range="{{districtArr}}" range-key="villages"
+          data-tag="districtId" data-name="villagesNm" data-range="districtArr" disabled="{{type}}"
+          bindchange="districtChange">
+          <view class="value">{{villagesNm.length?villagesNm:'请选择所属片区'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">建档日期：</view>
+        <picker mode="date" value="{{createtime}}" disabled="{{type}}" data-tag="createtime" bindchange="bindChange">
+          <view class="value">{{createtime?createtime:'请选择点火日期'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">用气情况：</view>
+        <picker mode="selector" value="{{useState}}" disabled="{{type}}" range="{{use_stateArr}}" range-key="dictNm"
+          data-tag="useState" data-name="useStateNm" data-range="use_stateArr" bindchange="selectChange">
+          <view class="value">{{useStateNm.length?useStateNm:'请选择用气情况'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">用户类型：</view>
+        <picker mode="selector" value="{{useType}}" disabled="{{type}}" range="{{use_typeArr}}" range-key="dictNm"
+          data-tag="useType" data-name="useTypeNm" data-range="use_typeArr" bindchange="selectChange">
+          <view class="value">{{useTypeNm.length?useTypeNm:'请选择用户类型'}}</view>
+        </picker>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="section">
+    <van-collapse-item title="表具信息" name="2">
+      <view class="row">
+        <view class="label">表具编号：</view>
+        <input class="value" placeholder="请输入表具编号" disabled="{{type}}" value="{{meterNum}}" data-tag="meterNum"
+          bindinput="inputChange" />
+        <view class="badge">*</view>
+        <image class="icon" src="../../assets/images/scan.png" data-tag="meterNum" />
+      </view>
+      
+      <view class="row">
+        <view class="label">表具方向：</view>
+        <van-radio-group value="{{ meterDirection }}" disabled="{{type}}" data-tag="meterDirection"
+          bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ meterDirection }}" name="0">
+            <image slot="icon" src="{{ meterDirection == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">左</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ meterDirection }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ meterDirection == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">右</view>
+          </van-radio>
+
+        </van-radio-group>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">调压箱号：</view>
+        <input class="value" disabled="{{type}}" placeholder="请输入调压箱号" value="{{pressureBoxNum}}"
+          data-tag="pressureBoxNum" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">表箱号：</view>
+        <input class="value" disabled="{{type}}" placeholder="请输入表箱号" value="{{meterBoxNum}}" data-tag="meterBoxNum"
+          bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">表具类型：</view>
+        <picker mode="selector" value="{{meterType}}" disabled="{{type}}" range="{{meter_typeArr}}" range-key="dictNm"
+          data-tag="meterType" data-name="meterTypeNm" data-range="meter_typeArr" bindchange="selectChange">
+          <view class="value">{{meterTypeNm.length?meterTypeNm:'请选择表具类型'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">气表厂家：</view>
+        <picker mode="selector" value="{{manufacturersId}}" disabled="{{type}}" range="{{manufacturersArr}}"
+          range-key="manufacturers" data-tag="manufacturersId" data-name="manufacturersIdNm" data-range="manufacturersArr"
+          bindchange="manufacturersChange">
+          <view class="value">{{manufacturersIdNm.length?manufacturersIdNm:'请选择气表厂家'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">防盗扣编号：</view>
+        <input class="value" placeholder="请输入防盗扣编号" disabled="{{type}}" value="{{antiTheftNum}}" data-tag="antiTheftNum"
+          bindinput="inputChange" />
+        <view class="badge">*</view>
+        <image class="icon" src="../../assets/images/scan.png" data-tag="antiTheftNum" />
+      </view>
+      <view class="row">
+        <view class="label">铅封编号：</view>
+        <input class="value" placeholder="请输入铅封编号" value="{{carSealNum}}" disabled="{{type}}" data-tag="carSealNum"
+          bindinput="inputChange" />
+        <view class="badge">*</view>
+        <image class="icon" src="../../assets/images/scan.png" data-tag="carSealNum" />
+      </view>
+      <view class="row">
+        <view class="label">表型号：</view>
+        <picker mode="selector" value="{{gasMaterId}}" disabled="{{type}}" range="{{gasMaterArr}}"
+          range-key="meterVer" data-tag="gasMaterId" data-name="gasMaterIdNm" data-range="gasMaterArr"
+          bindchange="gasMaterChange">
+          <view class="value">{{gasMaterIdNm.length?gasMaterIdNm:'请选择表型号'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">用气性质：</view>
+        <picker mode="selector" value="{{useState}}" disabled="{{type}}" range="{{use_stateArr}}" range-key="dictNm"
+          data-tag="useState" data-name="useStateNm" data-range="use_stateArr" bindchange="selectChange">
+          <view class="value">{{useStateNm.length?useStateNm:'请选择用气性质'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">安检日期：</view>
+        <picker mode="date" value="{{checkTime}}" disabled="{{type}}" data-tag="checkTime" bindchange="bindChange">
+          <view class="value">{{checkTime?checkTime:'请选择安检日期'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">身份证号：</view>
+        <input class="value" disabled="{{type}}" placeholder="请输入身份证号" maxlength="20" value="{{idCard}}"
+          data-tag="idCard" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">上期读数：</view>
+        <input class="value" placeholder="请输入上期读数"  value="{{lastNum}}" data-tag="lastNum"
+          bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">本期读数：</view>
+        <input class="value" placeholder="请输入本期读数"  value="{{nowNum}}" data-tag="nowNum"
+          bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">剩余金额：</view>
+        <input class="value" placeholder="请输入剩余金额"  value="{{residueMoney}}" data-tag="residueMoney"
+          bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">地址表箱：</view>
+        <input class="value" placeholder="请输入地址表箱" maxlength="50" value="{{placeMaterBox}}" data-tag="placeMaterBox"
+          bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">身份证正面：</view>
+        <view class="img_group">
+          <image src="{{idcardDownImgPathPreview}}" class="img" data-preview="{{idcardDownImgPathPreview}}"
+            bindtap="preview" wx:if="{{idcardDownImgPathPreview}}" />
+          <image src="{{imgUrl+idcardDownImgPath}}" class="img" data-preview="{{imgUrl+idcardDownImgPath}}"
+            bindtap="preview" wx:elif="{{idcardDownImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="idcardDownImgPathPreview"
+            data-tag="idcardDownImgPath" bindtap="takePictures" wx:if="{{!type}}" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">身份证反面：</view>
+        <view class="img_group">
+
+          <image src="{{idcardUpImgPathPreview}}" class="img" data-preview="{{idcardUpImgPathPreview}}"
+            bindtap="preview" wx:if="{{idcardUpImgPathPreview}}" />
+          <image src="{{imgUrl+idcardUpImgPath}}" class="img" data-preview="{{imgUrl+idcardUpImgPath}}"
+            bindtap="preview" wx:elif="{{idcardUpImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="idcardUpImgPathPreview"
+            data-tag="idcardUpImgPath" bindtap="takePictures" wx:if="{{!type}}" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">户口本：</view>
+        <view class="img_group">
+
+          <image src="{{residenceImgPathPreview}}" class="img" data-preview="{{residenceImgPathPreview}}"
+            bindtap="preview" wx:if="{{residenceImgPathPreview}}" />
+          <image src="{{imgUrl+residenceImgPath}}" class="img" data-preview="{{imgUrl+residenceImgPath}}"
+            bindtap="preview" wx:elif="{{residenceImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="residenceImgPathPreview"
+            data-tag="residenceImgPath" bindtap="takePictures" wx:if="{{!type}}" />
+        </view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="btn" bindtap="submitOrder" wx:if="{{!type}}">
+    提交工单
+  </view>
+</van-collapse>

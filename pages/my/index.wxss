@@ -1,0 +1,70 @@
+page {
+  padding: 40rpx;
+  background: #fbfbfb;
+  box-sizing: border-box;
+}
+.head{
+  padding: 0 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 200rpx;
+  border-radius: 30rpx 30rpx 0 0;
+  background: #5AC8FA;
+}
+.head .img{
+  width: 160rpx;
+  height: 160rpx;
+}
+.head .name{
+  font-size: 40rpx;
+  color: #fff;
+}
+.main {
+  padding: 80rpx 24rpx;
+  border-radius: 0 0 30rpx 30rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 10rpx -4rpx rgba(000, 000, 000, .4);
+}
+
+
+.main .row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main .row:not(:last-child) {
+  margin-bottom: 20rpx;
+
+}
+
+.main .row .title {
+  display: flex;
+  align-items: center;
+  min-width: 160rpx;
+  font-size: 32rpx;
+  color: #323232;
+}
+
+.main .row .title .icon {
+  margin-right: 16rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.main .row .info {
+  font-size: 36rpx;
+  color: #B8B8B9;
+  text-align: right;
+}
+
+.btn {
+  margin: 30rpx;
+  box-sizing: border-box;
+}
+.btn .button{
+  border-radius: 30rpx;
+  background: #00C7FF;
+  border: none;
+}

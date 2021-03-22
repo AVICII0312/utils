@@ -1,0 +1,92 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="sign">
+        <view class="vertical-center" style="height: 72rpx;">
+            <van-icon name="checked" color="green" size="36rpx" /><label
+                style="font-size:12px;margin-left:20rpx;color:#8E8E93">{{address}}</label>
+            <view class="right">
+                <van-button round type="primary" size="mini" wx:if="{{checkInStatus}}" bindtap="goWork">{{goOffWork}}</van-button>
+                <van-button round type="info" size="mini" wx:else bindtap="checkIn">上班</van-button>
+            </view>
+        </view>
+    </view>
+    <map id="map" longitude="{{markers[0].longitude}}" latitude="{{markers[0].latitude}}" scale="15"
+        bindmarkertap="markertap" enable-zoom markers="{{markers}}" show-location="{{false}}"
+        style="width: 100%; height: 428rpx">
+        <cover-view slot="callout" class="callout" marker-id="{{item.id}}" bindtap="callPhone" wx:for="{{markers}}">
+            <cover-view class="callout_detail">
+                <cover-view class="callout_detail_name">{{item.username}}</cover-view>
+                <cover-view>{{item.phone}}</cover-view>
+            </cover-view>
+        </cover-view>
+    </map>
+    <view class="vertical-center funtionList">
+        <navigator class="funtionItem" hover-class="none" bindtap="getCount" url="/pages/orderList/index?type=2">
+            <image src="../../assets/icon/turn-down.png" class="img"></image>
+            <label class="label">处理驳回</label>
+        </navigator>
+        <navigator class="funtionItem" hover-class="none" url="/pages/addUser/index?add=true">
+            <image src="../../assets/icon/addUser.png" class="img"></image>
+            <label class="label">新增用户</label>
+        </navigator>
+        <view class="funtionItem" bindtap="onReset">
+            <image src="../../assets/icon/data-synchronization.png" class="img"></image>
+            <label class="label">数据同步</label>
+        </view>
+        <navigator class="funtionItem" hover-class="none" url="/pages/query/index">
+            <image src="../../assets/icon/search.png" class="img"></image>
+            <label class="label">综合查询</label>
+        </navigator>
+        <navigator class="funtionItem" hover-class="none" url="/pages/orderList/index?type=1">
+            <image src="../../assets/icon/workOrder.png" class="img"></image>
+            <label class="label">工单领用</label>
+        </navigator>
+    </view>
+    <view class="list">
+        <view class="divider">
+            <view style="font-size:24rpx;line-height:30rpx;display:flex;width:200rpx">
+                <image src="../../assets/icon/plan.png" style="height:30rpx;width:22rpx"></image>
+                <label style="margin-left:14rpx">今日计划列表</label>
+            </view>
+
+            <view style="width:500rpx">
+                <van-divider custom-style="margin:16rpx" />
+            </view>
+        </view>
+        <view class="panel" style="display:flex">
+            <view class="plan-detail">
+                <view>计划数: <label class="color-blue">{{plan.planCount}}</label></view>
+                <view></view>
+                <view>已审核: <label class="color-green">{{plan.checkCount}}</label></view>
+                <view>已驳回: <label class="color-purple">{{plan.rejectCount}}</label></view>
+                <view>待审核: <label class="color-yellow">{{plan.noCheckCount}}</label></view>
+                <view>待完成: <label class="color-red">{{plan.noCompleteCount}}</label></view>
+            </view>
+            <view class="rate">
+                <view class="color-cyan" style="font-size:60rpx;line-height:80rpx">{{plan.completionRate}}</view>
+                <view>工作完成率</view>
+            </view>
+        </view>
+    </view>
+    <view class="list">
+        <view class="divider">
+            <view style="font-size:24rpx;line-height:30rpx;display:flex;width:200rpx">
+                <image src="../../assets/icon/turnBackIcon.png" style="height:30rpx;width:30rpx"></image>
+                <label style="margin-left:14rpx">今日驳回列表</label>
+            </view>
+            <view style="width:500rpx">
+                <van-divider custom-style="margin:16rpx" />
+            </view>
+        </view>
+        <view class="panel" wx:for="{{rejectList}}">
+            <view class="list-item" data-type="{{item.OrderTypeFlag}}" data-id="{{item.id}}" bindtap="navigationTo">
+                <view><label>{{item.cusName}}</label><label>12345678912</label></view>
+                <view style="display:flex;font-size:24rpx">
+                    <view class="reason">{{item.checkBackTypeNm}}</view>
+                    <view style="width:150rpx;text-align:right">{{item.checkTimeStr}}</view>
+                </view>
+            </view>          
+        </view>
+    </view>
+</view>
+<tab-bar selected="{{0}}" />

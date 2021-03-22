@@ -1,0 +1,25 @@
+@import "/wxParse/wxParse.wxss";
+
+page {
+  box-sizing: border-box;
+  background-color: #FBFBFB;
+}
+
+.bg_white {
+  background: rgba(255, 255, 255, .1);
+}
+
+.bg_shadow {
+  box-shadow: 0 2rpx 6rpx 0 rgba(000, 000, 000, .1);
+}
+
+.van-hairline::after,
+.van-hairline--bottom::after,
+.van-hairline--left::after,
+.van-hairline--right::after,
+.van-hairline--surround::after,
+.van-hairline--top::after,
+.van-hairline--top-bottom::after {
+  border: none !important;
+
+}

@@ -8,7 +8,7 @@ module.exports = Behavior({
         this.setData({
             list: [],
             page: 1,
-            pageSize: 6,
+            pageSize: 10,
             isPage: true,
         })
     },
@@ -66,7 +66,7 @@ module.exports = Behavior({
         onReachBottom() {
             let _this = this
             this.listPull(this.data).then(res => {
-                this.getList()
+                _this.getList()
             })
         },
         getListGet(data) {

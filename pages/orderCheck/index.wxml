@@ -1,0 +1,97 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="入户情况" name="1">
+      <view class="row">
+        <view class="label">开始时间：</view>
+        <picker mode="date" value="{{sInspectStartTime}}" data-tag="sInspectStartTime" bindchange="bindChange">
+          <view class="value">{{sInspectStartTime?sInspectStartTime:'请输入开始时间'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">到户次数：</view>
+        <input class="value" placeholder="到户次数" data-tag="visitTimes" value="{{visitTimes}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">用户类型：</view>
+        <picker mode="selector" value="{{sUseType}}" range="{{security_user_typeArr}}" range-key="dictNm" data-tag="sUseType" data-name="sUseTypeNm" data-range="security_user_typeArr" bindchange="selectChange">
+          <view class="value">{{sUseTypeNm?sUseTypeNm:'请选择用户类型'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">分类：</view>
+        <picker mode="selector" value="{{sSecurityType}}" range="{{security_typeArr}}" range-key="dictNm" data-tag="sSecurityType" data-name="sSecurityTypeNm" data-range="security_typeArr" bindchange="selectChange">
+          <view class="value">{{sSecurityTypeNm.length?sSecurityTypeNm:'请选择用户分类'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">入户状态：</view>
+        <picker mode="selector" value="{{sEnterState}}" range="{{security_enter_stateArr}}" range-key="dictNm" data-tag="sEnterState" data-name="sEnterStateNm" data-range="security_enter_stateArr" bindchange="selectChange">
+          <view class="value">{{sEnterStateNm.length?sEnterStateNm:'请选择入户状态'}}</view>
+        </picker>
+      </view>
+      <view class="row add">
+        <view class="label">特殊人群：</view>
+        <van-radio-group value="{{ sIsSpecial }}" data-tag="sIsSpecial" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ sIsSpecial }}" name="0">
+            <image slot="icon" src="{{ sIsSpecial == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">是</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ sIsSpecial }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ sIsSpecial == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">否</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row add">
+        <view class="label"></view>
+        <input class="value" disabled="{{true}}" value="{{sSpecialHumList}}" placeholder="请选择特殊类型" />
+        <image class="icon" src="../../assets/images/add_icon.svg" data-tag="confirm" bindtap="popupShow" />
+      </view>
+      <view class="row add">
+        <view class="label">是否确户：</view>
+        <van-radio-group value="{{ sIsConfirm }}" data-tag="sIsConfirm" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ sIsConfirm }}" name="0">
+            <image slot="icon" src="{{ sIsConfirm == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">是</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ sIsConfirm }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ sIsConfirm == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">否</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row add">
+        <view class="label">人口数：</view>
+        <input class="value" placeholder="请输入人口数" data-tag="sHumNum" value="{{sHumNum}}" bindinput="inputChange" />
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="section flex" data-tag="checkInDoor" bindtap="checkJump">
+    <view class="title_name">户内安检</view>
+    <van-icon name="arrow" color="#fff" />
+  </view>
+  <view class="section flex orange" data-tag="checkDanger" bindtap="checkJump">
+    <view class="title_name">隐患模块</view>
+    <van-icon name="arrow" color="#fff" />
+  </view>
+  <view class="btn_container">
+   <view class="btn save" data-tag="save" bindtap="submitOrder" wx:if="{{nextStep}}">下一步</view>
+    <block wx:else>
+      <view class="btn save" data-tag="save" bindtap="submitOrder">暂存工单</view>
+      <view class="btn" data-tag="submit" bindtap="submitOrder">提交工单</view>
+    </block>
+  </view>
+</van-collapse>
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" round bind:close="popupShow">
+  <view class="popup_title">
+    <view class="text" data-tag="cancel" bindtap="popupShow">取消</view>
+    <view class="text confirm" data-tag="confirm" bindtap="popupShow">确定</view>
+  </view>
+  <van-checkbox-group value="{{ result }}" bind:change="checkChange">
+    <van-cell-group>
+      <van-cell wx:for="{{ special_humArr }}" wx:key="index" title="{{ item.dictNm }}" value-class="value-class" clickable data-index="{{ index }}" bind:click="toggle">
+        <van-checkbox catch:tap="noop" class="checkboxes-{{ index }}" name="{{ index }}" />
+      </van-cell>
+    </van-cell-group>
+  </van-checkbox-group>
+</van-popup>

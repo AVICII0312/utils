@@ -1,0 +1,48 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="隐患板块" name="1">
+      <block wx:for="{{titles}}" wx:for-item="box">
+        <view class="row">
+          <view class="row_title">{{box.title}}</view>
+          <image class="icon" src="../../assets/images/add_icon.svg" data-idx="{{index}}" bindtap="menuShow" />
+        </view>
+        <block wx:for="{{box.info}}" wx:for-index="itemIdx">
+          <view class="row">
+            <view class="remove" data-box-idx="{{index}}" data-item-idx="{{itemIdx}}" bindtap="menuHidden">
+              删除
+            </view>
+            <picker mode="selector" range="{{selectInfo[box.tag]}}" disabled="{{!selectInfo[box.tag].length}}" range-key="title" data-box-idx="{{index}}" data-item-idx="{{itemIdx}}" 
+            data-tag="dDangerId" data-name="dDangerIdNm" data-range="{{selectInfo[box.tag]}}" bindchange="dangerChange">
+              <view class="value">{{item.dDangerIdNm?item.dDangerIdNm:'请选择检查项'}}</view>
+            </picker>
+          </view>
+          <view class="row add">
+            <view class="label">备注：</view>
+            <input class="value" value="{{item.dDangerRemark}}" data-box-idx="{{index}}" data-item-idx="{{itemIdx}}" data-tag="dDangerRemark" placeholder="请输入备注" bindinput="dangerInput" />
+          </view>
+          <view class="row add">
+            <view class="label">拍照：</view>
+            <view class="img_group">
+              <image src="{{imgUrl+item.dDangerImgPath}}" class="img" data-preview="{{[imgUrl+item.dDangerImgPath]}}" bindtap="preview" wx:if="{{item.dDangerImgPath}}" />
+              <image src="../../assets/images/img.png" class="img" wx:else />
+              <image src="../../assets/images/addImg.svg" class="add_img" data-box-idx="{{index}}" data-item-idx="{{itemIdx}}" data-tag="dDangerImgPath" bindtap="takeDangerPictures" />
+            </view>
+          </view>
+          <view class="row add">
+            <view class="label">定责：</view>
+            <picker mode="selector" data-box-idx="{{index}}" data-item-idx="{{itemIdx}}" range="{{duty_typeArr}}" range-key="dictNm" data-tag="dDutyType" data-name="dDutyTypeNm" data-range="duty_typeArr" bindchange="dangerChange">
+              <view class="value">{{item.dDutyTypeNm?item.dDutyTypeNm:'请选择责任归属'}}</view>
+            </picker>
+          </view>
+          <view class="row add">
+            <view class="label">状态选择：</view>
+            <picker mode="selector" data-box-idx="{{index}}" data-item-idx="{{itemIdx}}" range="{{result_typeArr}}" range-key="dictNm" data-tag="dResultType" data-name="dResultTypeNm" data-range="result_typeArr" bindchange="dangerChange">
+              <view class="value">{{item.dResultTypeNm?item.dResultTypeNm:'请选择整改结果'}}</view>
+            </picker>
+          </view>
+        </block>
+      </block>
+    </van-collapse-item>
+  </view>
+  <view class="btn" bindtap="save">完成</view>
+</van-collapse>

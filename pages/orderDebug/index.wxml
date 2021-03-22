@@ -1,0 +1,53 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="调试表" name="1">
+      <view class="row">
+        <view class="row_title">维修前拍照</view>
+        <image class="icon" src="../../assets/images/video.svg" data-tag="tBeforeImgPath" data-preview="tBeforeImgPathPreview" bindtap="takeVideo" />
+      </view>
+      <view class="row" style="height:100%">
+        <video src="{{tBeforeImgPathPreview}}" class="video_play" wx:if="{{tBeforeImgPathPreview.length}}"></video>
+        <video src="{{imgUrl+tBeforeImgPath}}" class="video_play" wx:elif="{{tBeforeImgPath.length}}"></video>
+        <image class="video_play" src="../../assets/images/video_play.svg" bindtap="preViewVideo" wx:else />
+      </view>
+      <view class="row">
+        <view class="row_title">维修信息</view>
+      </view>
+      <view class="row">
+        <view class="label">调试项目：</view>
+        <picker mode="selector" value="{{tTestType}}" range="{{test_typeArr}}" range-key="dictNm" data-tag="tTestType" data-name="tTestTypeNm" data-range="test_typeArr" bindchange="selectChange">
+          <view class="value">{{tTestTypeNm.length?tTestTypeNm:'请选择调试项目'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">备注：</view>
+        <input class="value" placeholder="请填写备注" data-tag="tRemark" value="{{tRemark}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="row_title">维修后拍照</view>
+        <image class="icon" src="../../assets/images/video.svg" data-tag="tAfterImgPath" data-preview="tAfterImgPathPreview" bindtap="takeVideo" />
+      </view>
+      <view class="row" style="height:100%">
+        <video src="{{tAfterImgPathPreview}}" class="video_play" wx:if="{{tAfterImgPathPreview.length}}"></video>
+        <video src="{{imgUrl+tAfterImgPath}}" class="video_play" wx:elif="{{tAfterImgPath.length}}"></video>
+        <image class="video_play" src="../../assets/images/video_play.svg" bindtap="preViewVideo" wx:else />
+      </view>
+      <view class="row">
+        <view class="label">单据照片：</view>
+        <view class="img_group">
+          <image src="{{tBillsImgPathPreview}}" class="img" data-preview="{{tBillsImgPathPreview}}" bindtap="preview" wx:if="{{tBillsImgPathPreview}}" />
+          <image src="{{imgUrl+tBillsImgPath}}" class="img" data-preview="{{imgUrl+tBillsImgPath}}" bindtap="preview" wx:elif="{{tBillsImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="tBillsImgPathPreview" data-tag="tBillsImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="btn_container">
+    <view class="btn save" data-tag="save" bindtap="submitOrder" wx:if="{{nextStep}}">下一步</view>
+    <block wx:else>
+      <view class="btn save" data-tag="save" bindtap="submitOrder">暂存工单</view>
+      <view class="btn" data-tag="submit" bindtap="submitOrder">提交工单</view>
+    </block>
+  </view>
+</van-collapse>

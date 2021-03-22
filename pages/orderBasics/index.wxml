@@ -1,0 +1,71 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="用户信息" name="1">
+      <view class="row">
+        <view class="label">客户名称：</view>
+        <input class="value" placeholder="请输入客户名称" />
+      </view>
+      <view class="row">
+        <view class="label">客户地址：</view>
+        <input class="value" placeholder="请输入客户地址" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">客户编号：</view>
+        <input class="value" placeholder="请输入客户编号" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">装表日期：</view>
+        <input class="value" placeholder="请输入装表日期" />
+      </view>
+      <view class="row">
+        <view class="label">点火日期：</view>
+        <input class="value" placeholder="请输入点火日期" />
+      </view>
+      <view class="row">
+        <view class="label">换表日期：</view>
+        <input class="value" placeholder="请输入换表日期" />
+      </view>
+      <view class="row">
+        <view class="label">联系人：</view>
+        <input class="value" placeholder="请输入联系人" />
+      </view>
+      <view class="row">
+        <view class="label">移动电话：</view>
+        <input class="value" placeholder="请输入移动电话" />
+      </view>
+      <view class="row">
+        <view class="label">联系电话2：</view>
+        <input class="value" placeholder="请输入联系电话2" />
+      </view>
+      <view class="row">
+        <view class="label">所属片区：</view>
+        <picker mode="date">
+          <input class="value" placeholder="请选择所属片区" />
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">建档日期：</view>
+        <picker mode="date">
+          <input class="value" placeholder="请选择建档日期" />
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">用气情况：</view>
+        <picker mode="date">
+          <input class="value" placeholder="请选择用气情况" />
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">用户类型：</view>
+        <picker mode="date">
+          <input class="value" placeholder="请选择用户类型" />
+        </picker>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="btn">
+    提交工单
+  </view>
+</van-collapse>

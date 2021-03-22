@@ -1,0 +1,325 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="户内安检" name="1">
+      <view class="row">
+        <view class="row_title">燃气表</view>
+      </view>
+      <view class="row">
+        <view class="label">安装位置：</view>
+        <picker mode="selector" value="{{sInstaPlace}}" range="{{meter_install_placeArr}}" range-key="dictNm" data-tag="sInstaPlace" data-name="sInstaPlaceNm" data-range="meter_install_placeArr" bindchange="selectChange">
+          <view class="value">{{sInstaPlaceNm.length?sInstaPlaceNm:'请选择安装位置'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="row_title">户内管</view>
+      </view>
+      <view class="row">
+        <view class="label">使用管材：</view>
+        <picker mode="selector" value="{{sUsePipeType}}" range="{{pipe_typeArr}}" range-key="dictNm" data-tag="sUsePipeType" data-name="sUsePipeTypeNm" data-range="pipe_typeArr" bindchange="selectChange">
+          <view class="value">{{sUsePipeTypeNm.length?sUsePipeTypeNm:'请选择使用管材'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="row_title">灶具</view>
+      </view>
+      <view class="row">
+        <view class="label">是否有灶具：</view>
+        <picker mode="selector" value="{{sIsUtensils}}" range="{{common_hasArr}}" range-key="dictNm" data-tag="sIsUtensils" data-name="sIsUtensilsNm" data-range="common_hasArr" bindchange="selectChange">
+          <view class="value">{{sIsUtensilsNm.length?sIsUtensilsNm:'请选择是否有灶具'}}</view>
+        </picker>
+      </view>
+      <block wx:if="{{sIsUtensils==0}}">
+        <view class="row add">
+          <view class="label">安装方式：</view>
+          <picker mode="selector" value="{{sUtensilsIntstallType}}" range="{{utensils_install_typeArr}}" range-key="dictNm" data-tag="sUtensilsIntstallType" data-name="sUtensilsIntstallTypeNm" data-range="utensils_install_typeArr" bindchange="selectChange">
+            <view class="value">
+              {{sUtensilsIntstallTypeNm.length?sUtensilsIntstallTypeNm:'请选择安装方式'}}
+            </view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">灶具采购方式：</view>
+          <van-radio-group value="{{ sUtensilsBuyType }}" data-tag="sUtensilsBuyType" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ sUtensilsBuyType }}" name="0">
+              <image slot="icon" src="{{ sUtensilsBuyType == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">外采</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ sUtensilsBuyType }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ sUtensilsBuyType == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">公司采购</view>
+            </van-radio>
+          </van-radio-group>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add" wx:if="{{sUtensilsBuyType == 0}}">
+          <view class="label"></view>
+          <input class="value" placeholder="请填写外采备注" data-tag="iHumNum" value="{{iHumNum}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label">熄火保护：</view>
+          <van-radio-group value="{{ sIsFreeProtect }}" data-tag="sIsFreeProtect" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ sIsFreeProtect }}" name="0">
+              <image slot="icon" src="{{ sIsFreeProtect == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">有</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ sIsFreeProtect }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ sIsFreeProtect == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">无</view>
+            </van-radio>
+          </van-radio-group>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">熄火保护照片：</view>
+          <view class="img_group">
+            <image src="{{sFreeProtectImgPathPreview}}" class="img" data-preview="{{sFreeProtectImgPathPreview}}" bindtap="preview" wx:if="{{sFreeProtectImgPathPreview}}" />
+            <image src="{{imgUrl+sFreeProtectImgPath}}" class="img" data-preview="{{imgUrl+sFreeProtectImgPath}}" bindtap="preview" wx:elif="{{sFreeProtectImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="sFreeProtectImgPathPreview" data-tag="sFreeProtectImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row add">
+          <view class="label">连接方式：</view>
+          <picker mode="selector" value="{{sUtensilsLink}}" range="{{utensils_link_typeArr}}" range-key="dictNm" data-tag="sUtensilsLink" data-name="sUtensilsLinkNm" data-range="utensils_link_typeArr" bindchange="selectChange">
+            <view class="value">{{sUtensilsLinkNm.length?sUtensilsLinkNm:'请选择连接方式'}}</view>
+          </picker>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">灶具品牌：</view>
+          <input class="value" placeholder="请填写灶具品牌" data-tag="sUtensilsName" value="{{sUtensilsName}}" bindinput="inputChange" />
+        </view>
+         <view class="row add">
+          <view class="label" style="width: 200rpx;">灶具生产日期：</view>
+          <picker mode="date" value="{{sUtensilsTime}}" data-tag="sUtensilsTime" bindchange="bindChange">
+            <view class="value">{{sUtensilsTime?sUtensilsTime:'请选择生产日期'}}</view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">厨房全貌</view>
+          <image class="icon" src="../../assets/images/video.svg" data-tag="sKitchenImgPath" data-preview="sKitchenImgPathPreview" bindtap="takeVideo" />
+        </view>
+        <view class="row add" style="height:100%;padding-bottom:20rpx;">
+          <video src="{{sKitchenImgPathPreview}}" class="video_play" wx:if="{{sKitchenImgPathPreview.length}}"></video>
+          <video src="{{imgUrl+sKitchenImgPath}}" class="video_play" wx:elif="{{sKitchenImgPath.length}}"></video>
+          <image class="video_play" src="../../assets/images/video_play.svg" bindtap="preViewVideo" wx:else />
+        </view>
+      </block>
+      <view class="row">
+        <view class="row_title">热水器</view>
+      </view>
+      <view class="row">
+        <view class="label">是否有热水器：</view>
+        <picker mode="selector" value="{{sIsHotWater}}" range="{{common_hasArr}}" range-key="dictNm" data-tag="sIsHotWater" data-name="sIsHotWaterNm" data-range="common_hasArr" bindchange="selectChange">
+          <view class="value">{{sIsHotWaterNm.length?sIsHotWaterNm:'请选择是否有热水器'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <block wx:if="{{sIsHotWater==0}}">
+        <view class="row add">
+          <view class="label">安装位置：</view>
+          <picker mode="selector" value="{{sHotWaterPlace}}" range="{{security_install_placeArr}}" range-key="dictNm" data-tag="sHotWaterPlace" data-name="sHotWaterPlaceNm" data-range="security_install_placeArr" bindchange="selectChange">
+            <view class="value">{{sHotWaterPlaceNm.length?sHotWaterPlaceNm:'请选择安装位置'}}</view>
+          </picker>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">连接方式：</view>
+          <picker mode="selector" value="{{sHotWaterLink}}" range="{{stove_link_typeArr}}" range-key="dictNm" data-tag="sHotWaterLink" data-name="sHotWaterLinkNm" data-range="stove_link_typeArr" bindchange="selectChange">
+            <view class="value">{{sHotWaterLinkNm.length?sHotWaterLinkNm:'请选择连接方式'}}</view>
+          </picker>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">热水器品牌：</view>
+          <input class="value" placeholder="热水器品牌" data-tag="sHotWaterName" value="{{sHotWaterName}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label">热水器型号：</view>
+          <input class="value" placeholder="热水器型号" data-tag="sHotWaterNum" value="{{sHotWaterNum}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label" style="width: 200rpx;">热水器生产日期：</view>
+          <picker mode="date" value="{{sHotWaterTime}}" data-tag="sHotWaterTime" bindchange="bindChange">
+            <view class="value">{{sHotWaterTime?sHotWaterTime:'请选择生产日期'}}</view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">热水器拍照：</view>
+          <view class="img_group">
+            <image src="{{sHotWaterRoomImgPathPreview}}" class="img" data-preview="{{sHotWaterRoomImgPathPreview}}" bindtap="preview" wx:if="{{sHotWaterRoomImgPathPreview}}" />
+            <image src="{{imgUrl+sHotWaterRoomImgPath}}" class="img" data-preview="{{imgUrl+sHotWaterRoomImgPath}}" bindtap="preview" wx:elif="{{sHotWaterRoomImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="sHotWaterRoomImgPathPreview" data-tag="sHotWaterRoomImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <view class="row">
+        <view class="row_title">壁挂炉</view>
+      </view>
+      <view class="row">
+        <view class="label">是否有壁挂炉：</view>
+        <picker mode="selector" value="{{sIsStove}}" range="{{common_hasArr}}" range-key="dictNm" data-tag="sIsStove" data-name="sIsStoveNm" data-range="common_hasArr" bindchange="selectChange">
+          <view class="value">{{sIsStoveNm.length?sIsStoveNm:'请选择是否有壁挂炉'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <block wx:if="{{sIsStove==0}}">
+        <view class="row add">
+          <view class="label">安装位置：</view>
+          <picker mode="selector" value="{{sStovePlace}}" range="{{security_install_placeArr}}" range-key="dictNm" data-tag="sStovePlace" data-name="sStovePlaceNm" data-range="security_install_placeArr" bindchange="selectChange">
+            <view class="value">{{sStovePlaceNm.length?sStovePlaceNm:'请选择安装位置'}}</view>
+          </picker>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">连接方式：</view>
+          <picker mode="selector" value="{{sStoveLink}}" range="{{stove_link_typeArr}}" range-key="dictNm" data-tag="sStoveLink" data-name="sStoveLinkNm" data-range="stove_link_typeArr" bindchange="selectChange">
+            <view class="value">{{sStoveLinkNm.length?sStoveLinkNm:'请选择连接方式'}}</view>
+          </picker>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="label">壁挂炉品牌：</view>
+          <input class="value" placeholder="壁挂炉品牌" data-tag="sStoveName" value="{{sStoveName}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label">壁挂炉型号：</view>
+          <input class="value" placeholder="壁挂炉型号" data-tag="sStoveNum" value="{{sStoveNum}}" bindinput="inputChange" />
+        </view>
+        <view class="row add">
+          <view class="label">生产日期：</view>
+          <picker mode="date" value="{{sStoveTime}}" data-tag="sStoveTime" bindchange="bindChange">
+            <view class="value">{{sStoveTime?sStoveTime:'请选择生产日期'}}</view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">铭牌拍照：</view>
+          <view class="img_group">
+            <image src="{{sStoveImgPathPreview}}" class="img" data-preview="{{sStoveImgPathPreview}}" bindtap="preview" wx:if="{{sStoveImgPathPreview}}" />
+            <image src="{{imgUrl+sStoveImgPath}}" class="img" data-preview="{{imgUrl+sStoveImgPath}}" bindtap="preview" wx:elif="{{sStoveImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="sStoveImgPathPreview" data-tag="sStoveImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row add">
+          <view class="label">房间全貌</view>
+          <image class="icon" src="../../assets/images/video.svg" data-tag="sStoveRoomImgPath" data-preview="sStoveRoomImgPathPreview" bindtap="takeVideo" />
+        </view>
+        <view class="row add" style="height:100%;padding-bottom:20rpx;">
+          <video src="{{sStoveRoomImgPathPreview}}" class="video_play" wx:if="{{sStoveRoomImgPathPreview.length}}"></video>
+          <video src="{{imgUrl+sStoveRoomImgPath}}" class="video_play" wx:elif="{{sStoveRoomImgPath.length}}"></video>
+          <image class="video_play" src="../../assets/images/video_play.svg" bindtap="preViewVideo" wx:else />
+        </view>
+      </block>
+      <view class="row">
+        <view class="row_title">其他</view>
+      </view>
+      <view class="row ">
+        <view class="label">厨房类型</view>
+        <picker mode="selector" value="{{sKitchenType}}" range="{{kitchen_typeArr}}" range-key="dictNm" data-tag="sKitchenType" data-name="sKitchenTypeNm" data-range="kitchen_typeArr" bindchange="selectChange">
+          <view class="value">{{sKitchenTypeNm.length?sKitchenTypeNm:'请选择是否有灶具'}}</view>
+        </picker>
+      </view>
+      <view class="row ">
+        <view class="label">泄漏报警器</view>
+        <van-radio-group value="{{ sIsSiren }}" data-tag="sIsSiren" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ sIsSiren }}" name="0">
+            <image slot="icon" src="{{ sIsSiren == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ sIsSiren }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ sIsSiren == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label">报警器拍照：</view>
+        <view class="img_group">
+          <image src="{{sSirenImgPathPreview}}" class="img" data-preview="{{sSirenImgPathPreview}}" bindtap="preview" wx:if="{{sSirenImgPathPreview}}" />
+          <image src="{{imgUrl+sSirenImgPath}}" class="img" data-preview="{{imgUrl+sSirenImgPath}}" bindtap="preview" wx:elif="{{sSirenImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="sSirenImgPathPreview" data-tag="sSirenImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row ">
+        <view class="label">切断阀</view>
+        <van-radio-group value="{{ sIsValve }}" data-tag="sIsValve" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ sIsValve }}" name="0">
+            <image slot="icon" src="{{ sIsValve == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ sIsValve }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ sIsValve == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label">切断阀拍照：</view>
+        <view class="img_group">
+          <image src="{{sValveImgPathPreview}}" class="img" data-preview="{{sValveImgPathPreview}}" bindtap="preview" wx:if="{{sValveImgPathPreview}}" />
+          <image src="{{imgUrl+sValveImgPath}}" class="img" data-preview="{{imgUrl+sValveImgPath}}" bindtap="preview" wx:elif="{{sValveImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="sValveImgPathPreview" data-tag="sValveImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="row_title">备注</view>
+      </view>
+      <view class="row ">
+        <view class="label"></view>
+        <input class="value" placeholder="请填写备注信息" data-tag="sRemark" value="{{sRemark}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">身份证拍照</view>
+        <van-radio-group value="{{ sIsIdcard }}" data-tag="sIsIdcard" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ sIsIdcard }}" name="0">
+            <image slot="icon" src="{{ sIsIdcard == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ sIsIdcard }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ sIsIdcard == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label">户口本拍照</view>
+        <van-radio-group value="{{ sIsResidence }}" data-tag="sIsResidence" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ sIsResidence }}" name="0">
+            <image slot="icon" src="{{ sIsResidence == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ sIsResidence }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ sIsResidence == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="row_title">影像信息</view>
+      </view>
+      <view class="row ">
+        <view class="label">拍照留存：</view>
+        <view class="img_group">
+          <image src="{{sPhotoImgPathPreview}}" class="img" data-preview="{{sPhotoImgPathPreview}}" bindtap="preview" wx:if="{{sPhotoImgPathPreview}}" />
+          <image src="{{imgUrl+sPhotoImgPath}}" class="img" data-preview="{{imgUrl+sPhotoImgPath}}" bindtap="preview" wx:elif="{{sPhotoImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="sPhotoImgPathPreview" data-tag="sPhotoImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="row_title">客户评价</view>
+      </view>
+      <view class="row ">
+        <view class="label">客户评价</view>
+        <picker mode="selector" value="{{sCusEvaluateType}}" range="{{cus_evaluate_typeArr}}" range-key="dictNm" data-tag="sCusEvaluateType" data-name="sCusEvaluateTypeNm" data-range="cus_evaluate_typeArr" bindchange="selectChange">
+          <view class="value">{{sCusEvaluateTypeNm.length?sCusEvaluateTypeNm:'请选择客户评价'}}</view>
+        </picker>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="btn" bindtap="save">完成</view>
+</van-collapse>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "用户",
+  "usingComponents": {
+    "van-search": "/component/search/index"
+  }
+}

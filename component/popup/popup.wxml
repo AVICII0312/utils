@@ -1,0 +1,4 @@
+<view class="overlay" catchtouchmove="doNothing" bindtap="close">  
+    <slot></slot> 
+  <image class="icon" wx:if="{{icon}}" src="/images/{{icon}}.png" bindtap="close"></image>
+</view>

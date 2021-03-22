@@ -1,0 +1,35 @@
+.navigate {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 730rpx;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+  z-index: 999;
+  border: 10rpx solid #3294F0;
+}
+.navigate_info {
+  position: relative;
+  padding-top: 10rpx;
+  height: 48rpx;
+
+}
+.navigate_info .status_left {
+  padding: 0 36rpx;
+  width: 48rpx;
+  height: 48rpx;
+}
+.navigate_info .title {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  font-size: 36rpx;
+  color: #fff;
+  transform: translateX(-50%);
+}
+.bg_white {
+  background:#489DEC;
+}
+.bg_shadow {
+  box-shadow: 0 2rpx 6rpx 0 rgba(000, 000, 000, .1);
+}

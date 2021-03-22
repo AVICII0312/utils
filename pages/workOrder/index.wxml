@@ -1,0 +1,20 @@
+<!--index.wxml-->
+<view class="container">
+  <image class="container_bg" src="../../assets/images/order_img.png" />
+  <image class="container_img" src="../../assets/images/order_img2.png" />
+  <view class="options_list">
+    <navigator class="options" hover-class="none" url="../orderList/index?type=1">
+      <image class="options_icon" src="../../assets/icon/order_icon_1.png" />
+      <view>任务清单</view>
+    </navigator>
+    <navigator class="options" hover-class="none" url="../orderList/index?type=2">
+      <image class="options_icon" src="../../assets/icon/order_icon_2.png" />
+      <view>任务驳回</view>
+    </navigator>
+    <navigator class="options" hover-class="none" url="../orderList/index?type=3">
+      <image class="options_icon" src="../../assets/icon/order_icon_3.svg" />
+      <view>当前处理</view>
+    </navigator>
+  </view>
+</view>
+<tab-bar selected="{{1}}" />

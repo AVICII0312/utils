@@ -19,6 +19,7 @@ module.exports = Behavior({
                 [event.currentTarget.dataset.name]: this.data[event.currentTarget.dataset.range][event.detail.value].dictNm,
             })
         },
+        //图片上传
         takePictures(event) {
             let _this = this
             wx.chooseImage({
@@ -115,7 +116,7 @@ module.exports = Behavior({
                         success(result) {
                             const data = JSON.parse(result.data)
                             if (data.success) {
-                                if (_this.data[event.currentTarget.dataset.tag]) {
+                                if (_this.data[event.currentTarget.dataset.tag]!=null) {
                                     const {
                                         oldImgPath
                                     } = _this.data
@@ -167,6 +168,7 @@ module.exports = Behavior({
                 })
             })
         },
+        //扫码
         takeCode(event) {
             let _this = this
             console.log(event.currentTarget.dataset.tag)
@@ -192,6 +194,7 @@ module.exports = Behavior({
                 }
             })
         },
+        //表单校验
         formRule(grop) {
             let _this = this
             return new Promise((resolve, reject) => {
@@ -222,18 +225,18 @@ module.exports = Behavior({
                 })
             })
         },
-        navigateBack(url) {
-            const page = getCurrentPages()
+        navigateBack(pages,url) {
+            const page = pages
             page.forEach((item, index) => {
+                console.log(item.route,url)                 
                 if (item.route == url) {
                     wx.navigateBack({
-                        delta: page.length - index - 1
+                        delta: page.length - index
                     })
                 }
             })
         },
         jumpOrder(orderTypes) {
-
             const types = typeof( orderTypes)==Array?orderTypes:orderTypes.split(',')
             const urlTag = ['', 'Check', 'Swap', 'Change', 'Debug', 'Follow']
             types.splice(0, 1)

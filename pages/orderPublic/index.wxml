@@ -1,0 +1,476 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="用户信息" name="1">
+      <view class="row">
+        <view class="label">客户编号：</view>
+        <input class="value" placeholder="请输入客户编号" data-tag="cusNum" value="{{cusNum}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">客户姓名：</view>
+        <input class="value" placeholder="请输入客户姓名" data-tag="cusName" value="{{cusName}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">客户地址：</view>
+        <input class="value" placeholder="请输入客户地址" data-tag="address" value="{{address}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">联系电话：</view>
+        <input class="value" placeholder="请输入联系电话" data-tag="phone" value="{{phone}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">身份证号：</view>
+        <input class="value" placeholder="请输入身份证号" data-tag="idCard" value="{{idCard}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="label">点火日期：</view>
+        <picker mode="date" value="{{fireTime}}" data-tag="fireTime" bindchange="bindChange">
+          <view class="value">{{fireTime?fireTime:'请输入点火日期'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">表箱号：</view>
+        <input class="value" placeholder="请输入表箱号" data-tag="meterBoxNum" value="{{meterBoxNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">调压箱号：</view>
+        <input class="value" placeholder="请输入调压箱号" data-tag="pressureBoxNum" value="{{pressureBoxNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">身份证正面：</view>
+        <view class="img_group">
+          <image src="{{idcardUpImgPathPreview}}" class="img" data-preview="{{idcardUpImgPathPreview}}" bindtap="preview" wx:if="{{idcardUpImgPathPreview}}" />
+          <image src="{{imgUrl+idcardUpImgPath}}" class="img" data-preview="{{imgUrl+idcardUpImgPath}}" bindtap="preview" wx:elif="{{idcardUpImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="idcardUpImgPathPreview" data-tag="idcardUpImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">身份证反面：</view>
+        <view class="img_group">
+          <image src="{{idcardDownImgPathPreview}}" class="img" data-preview="{{idcardDownImgPathPreview}}" bindtap="preview" wx:if="{{idcardDownImgPathPreview}}" />
+          <image src="{{imgUrl+idcardDownImgPath}}" class="img" data-preview="{{imgUrl+idcardDownImgPath}}" bindtap="preview" wx:elif="{{idcardDownImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="idcardDownImgPathPreview" data-tag="idcardDownImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">户口本：</view>
+        <view class="img_group">
+          <image src="{{residenceImgPathPreview}}" class="img" data-preview="{{residenceImgPathPreview}}" bindtap="preview" wx:if="{{residenceImgPathPreview}}" />
+          <image src="{{imgUrl+residenceImgPath}}" class="img" data-preview="{{imgUrl+residenceImgPath}}" bindtap="preview" wx:elif="{{residenceImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="residenceImgPathPreview" data-tag="residenceImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="section">
+    <van-collapse-item title="燃气表" name="2">
+      <view class="row">
+        <view class="label">表具编号：</view>
+        <input class="value" placeholder="请输入表具编号" data-tag="meterNum" value="{{meterNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+        <image class="icon" src="../../assets/images/scan.png" data-tag="meterNum" bindtap="takeCode" />
+      </view>
+      <view class="row">
+        <view class="label">表具编号拍照：</view>
+        <view class="img_group">
+          <image src="{{meterImgPathPreview}}" class="img" data-preview="{{meterImgPathPreview}}" bindtap="preview" wx:if="{{meterImgPathPreview}}" />
+          <image src="{{imgUrl+meterImgPath}}" class="img" data-preview="{{imgUrl+meterImgPath}}" bindtap="preview" wx:elif="{{meterImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="meterImgPathPreview" data-tag="meterImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">气表厂家：</view>
+        <picker mode="selector" value="{{manufacturersId}}" range="{{manufacturersArr}}" range-key="manufacturers" data-tag="manufacturersId" data-name="manufacturersIdNm" data-range="manufacturersArr" bindchange="manufacturersChange">
+          <view class="value">{{manufacturersIdNm.length?manufacturersIdNm:'请选择气表厂家'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">具体型号：</view>
+        <picker mode="selector" value="{{gasMaterId}}" range="{{gasMaterArr}}" range-key="meterVer" data-tag="gasMaterId" data-name="meterVer" data-range="gasMaterArr" bindchange="gasMaterChange">
+          <view class="value">{{meterVer.length?meterVer:'请选择具体型号'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">表具型号：</view>
+        <view class="text">{{meterVerName?meterVerName:'具体型号自动生成'}}</view>
+      </view>
+      <view class="row">
+        <view class="label">表具类型：</view>
+        <view class="text">{{meterVerType?meterVerType:'具体型号自动生成'}}</view>
+      </view>
+      <view class="row">
+        <view class="label">表具类型：</view>
+        <picker mode="selector" value="{{meterType}}" range="{{meter_typeArr}}" range-key="dictNm" data-tag="meterType" data-name="meterTypeNm" data-range="meter_typeArr" bindchange="selectChange">
+          <view class="value">{{meterTypeNm.length?meterTypeNm:'请选择表具类型'}}</view>
+        </picker>
+      </view>
+      <view class="row">
+        <view class="label">表具方向：</view>
+        <van-radio-group value="{{ meterDirection }}" data-tag="meterDirection" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ meterDirection }}" name="0">
+            <image slot="icon" src="{{ meterDirection == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">左</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ meterDirection }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ meterDirection == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">右</view>
+          </van-radio>
+        </van-radio-group>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">安装位置：</view>
+        <picker mode="selector" value="{{place}}" range="{{meter_placeArr}}" range-key="dictNm" data-tag="place" data-name="placeNm" data-range="meter_placeArr" bindchange="selectChange">
+          <view class="value">{{placeNm.length?placeNm:'请选择安装位置'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="label">表前阀开启：</view>
+        <van-radio-group value="{{ isOpenValve }}" data-tag="isOpenValve" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ isOpenValve }}" name="0">
+            <image slot="icon" src="{{ isOpenValve == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">是</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ isOpenValve }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ isOpenValve == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">否</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="label" style="width:240rpx">上次防盗卡扣编号：</view>
+        <view class="text">{{antiTheftNum?antiTheftNum:'上次防盗卡扣编号自动生成'}}</view>
+      </view>
+      <view class="row">
+        <view class="label">防盗扣编号：</view>
+        <input class="value" placeholder="请输入防盗扣编号" data-tag="nowAntiTheftNum" value="{{nowAntiTheftNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+        <image class="icon" src="../../assets/images/scan.png" data-tag="nowAntiTheftNum" bindtap="takeCode" />
+      </view>
+      <view class="row">
+        <view class="label"></view>
+        <view class="img_group">
+          <image src="{{antiTheftImgPathPreview}}" class="img" data-preview="{{antiTheftImgPathPreview}}" bindtap="preview" wx:if="{{antiTheftImgPathPreview}}" />
+          <image src="{{imgUrl+antiTheftImgPath}}" class="img" data-preview="{{imgUrl+antiTheftImgPath}}" bindtap="preview" wx:elif="{{antiTheftImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="antiTheftImgPathPreview" data-tag="antiTheftImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">铅封编号：</view>
+        <van-radio-group value="{{ isCarSeal }}" data-tag="isCarSeal" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ isCarSeal }}" name="0">
+            <image slot="icon" src="{{ isCarSeal == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">有</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ isCarSeal }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ isCarSeal == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">无</view>
+          </van-radio>
+        </van-radio-group>
+        <view class="badge">*</view>
+      </view>
+      <block wx:if="{{ isCarSeal == 0}}">
+        <view class="row add">
+          <view class="label"></view>
+          <input class="value" placeholder="请输入铅封编号" data-tag="nowCarSealNum" value="{{nowCarSealNum}}" bindinput="inputChange" />
+          <view class="badge">*</view>
+          <image class="icon" src="../../assets/images/scan.png" data-tag="nowCarSealNum" bindtap="takeCode" />
+        </view>
+        <view class="row add">
+          <view class="label"></view>
+          <view class="img_group">
+            <image src="{{carSealImgPathPreview}}" class="img" data-preview="{{carSealImgPathPreview}}" bindtap="preview" wx:if="{{carSealImgPathPreview}}" />
+            <image src="{{imgUrl+carSealImgPath}}" class="img" data-preview="{{imgUrl+carSealImgPath}}" bindtap="preview" wx:elif="{{carSealImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="carSealImgPathPreview" data-tag="carSealImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <view class="row ">
+        <view class="label">本期读数：</view>
+        <input class="value" placeholder="请输入本期读数" data-tag="nowNum" value="{{nowNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+        <view class="text">元</view>
+      </view>
+      <view class="row ">
+        <view class="label"></view>
+        <view class="img_group">
+          <image src="{{nowNumImgPathPreview}}" class="img" data-preview="{{nowNumImgPathPreview}}" bindtap="preview" wx:if="{{nowNumImgPathPreview}}" />
+          <image src="{{imgUrl+nowNumImgPath}}" class="img" data-preview="{{imgUrl+nowNumImgPath}}" bindtap="preview" wx:elif="{{nowNumImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="nowNumImgPathPreview" data-tag="nowNumImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row ">
+        <view class="label">剩余金额：</view>
+        <input class="value" placeholder="请输入剩余金额" data-tag="residueMoney" value="{{residueMoney}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+        <view class="text">元</view>
+      </view>
+      <view class="row ">
+        <view class="label"></view>
+        <view class="img_group">
+          <image src="{{residueMoneyImgPathPreview}}" class="img" data-preview="{{residueMoneyImgPathPreview}}" bindtap="preview" wx:if="{{residueMoneyImgPathPreview}}" />
+          <image src="{{imgUrl+residueMoneyImgPath}}" class="img" data-preview="{{imgUrl+residueMoneyImgPath}}" bindtap="preview" wx:elif="{{residueMoneyImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="residueMoneyImgPathPreview" data-tag="residueMoneyImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <!-- 安检工单显示 -->
+      <block wx:if="{{Check}}">
+        <view class="row">
+          <view class="label" style="flex:1;">表前后管和表箱：</view>
+          <image class="icon" src="../../assets/images/video.svg" data-tag="sMeterFrontBackImgPath" bindtap="takeVideo" />
+        </view>
+        <video src="{{sMeterFrontBackImgPathPreview}}" class="video_play" wx:if="{{sMeterFrontBackImgPathPreview.length}}"></video>
+        <video src="{{imgUrl+sMeterFrontBackImgPath}}" class="video_play" wx:elif="{{sMeterFrontBackImgPath.length}}"></video>
+        <image class="video_play" src="../../assets/images/video_play.svg" data-tag="sMeterFrontBackImgPath" data-preview="sMeterFrontBackImgPathPreview" bindtap="preViewVideo" wx:else />
+      </block>
+      <!-- 换表工单显示 -->
+      <block wx:if="{{Swap}}">
+        <view class="row">
+          <view class="label">燃气表运行：</view>
+          <van-radio-group value="{{ rIsNormal }}" data-tag="rIsNormal" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ rIsNormal }}" name="0">
+              <image slot="icon" src="{{ rIsNormal == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">是</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ rIsNormal }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ rIsNormal == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">否</view>
+            </van-radio>
+          </van-radio-group>
+        </view>
+        <view class="row ">
+          <view class="label">走数前拍照：</view>
+          <view class="img_group">
+            <image src="{{rBeforeImgPathPreview}}" class="img" data-preview="{{rBeforeImgPathPreview}}" bindtap="preview" wx:if="{{rBeforeImgPathPreview}}" />
+            <image src="{{imgUrl+rBeforeImgPath}}" class="img" data-preview="{{imgUrl+rBeforeImgPath}}" bindtap="preview" wx:elif="{{rBeforeImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="rBeforeImgPathPreview" data-tag="rBeforeImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row ">
+          <view class="label">走数后拍照：</view>
+          <view class="img_group">
+            <image src="{{rLastImgPathPreview}}" class="img" data-preview="{{rLastImgPathPreview}}" bindtap="preview" wx:if="{{rLastImgPathPreview}}" />
+            <image src="{{imgUrl+rLastImgPath}}" class="img" data-preview="{{imgUrl+rLastImgPath}}" bindtap="preview" wx:elif="{{rLastImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="rLastImgPathPreview" data-tag="rLastImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <!-- 置换工单显示 -->
+      <block wx:if="{{Swap}}">
+        <view class="row">
+          <view class="label">外加表运行：</view>
+          <van-radio-group value="{{ iIsMeter }}" data-tag="iIsMeter" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ iIsMeter }}" name="0">
+              <image slot="icon" src="{{ iIsMeter == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">是</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ iIsMeter }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ iIsMeter == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">否</view>
+            </van-radio>
+          </van-radio-group>
+        </view>
+        <view class="row ">
+          <view class="label">走数前拍照：</view>
+          <view class="img_group">
+            <image src="{{iBeforeImgPathPreview}}" class="img" data-preview="{{iBeforeImgPathPreview}}" bindtap="preview" wx:if="{{iBeforeImgPathPreview}}" />
+            <image src="{{imgUrl+iBeforeImgPath}}" class="img" data-preview="{{imgUrl+iBeforeImgPath}}" bindtap="preview" wx:elif="{{iBeforeImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="iBeforeImgPathPreview" data-tag="iBeforeImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row ">
+          <view class="label">走数后拍照：</view>
+          <view class="img_group">
+            <image src="{{iLastImgPathPreview}}" class="img" data-preview="{{iLastImgPathPreview}}" bindtap="preview" wx:if="{{iLastImgPathPreview}}" />
+            <image src="{{imgUrl+iLastImgPath}}" class="img" data-preview="{{imgUrl+iLastImgPath}}" bindtap="preview" wx:elif="{{iLastImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="iLastImgPathPreview" data-tag="iLastImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+    </van-collapse-item>
+  </view>
+  <view class="section">
+    <van-collapse-item title="测压" name="3">
+      <view class="row">
+        <view class="label">气密性测试：</view>
+        <picker mode="selector" range="{{air_tightness_testArr}}" range-key="dictNm" data-tag="airSealType" data-name="airSealTypeNm" data-range="air_tightness_testArr" bindchange="selectChange">
+          <view class="value">{{airSealTypeNm.length?airSealTypeNm:'请选择测试工具'}}</view>
+        </picker>
+      </view>
+      <!-- 数字压力表 -->
+      <block wx:if="{{airSealType==1}}">
+        <view class="row add">
+          <view class="label">测压前：</view>
+          <view class="img_group">
+            <image src="{{agoPressureImgPathPreview}}" class="img" data-preview="{{agoPressureImgPathPreview}}" bindtap="preview" wx:if="{{agoPressureImgPathPreview}}" />
+            <image src="{{imgUrl+agoPressureImgPath}}" class="img" data-preview="{{imgUrl+agoPressureImgPath}}" bindtap="preview" wx:elif="{{agoPressureImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="agoPressureImgPathPreview" data-tag="agoPressureImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row add">
+          <view class="label">测压后：</view>
+          <view class="img_group">
+            <image src="{{laterPressureImgPathPreview}}" class="img" data-preview="{{laterPressureImgPathPreview}}" bindtap="preview" wx:if="{{laterPressureImgPathPreview}}" />
+            <image src="{{imgUrl+laterPressureImgPath}}" class="img" data-preview="{{imgUrl+laterPressureImgPath}}" bindtap="preview" wx:elif="{{laterPressureImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="laterPressureImgPathPreview" data-tag="laterPressureImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <!-- 皂液/检漏仪 -->
+      <block wx:elif="{{airSealType==2}}">
+        <view class="row add">
+          <view class="label">测压拍照：</view>
+          <view class="img_group">
+            <image src="{{pressureImgPathPreview}}" class="img" data-preview="{{pressureImgPathPreview}}" bindtap="preview" wx:if="{{pressureImgPathPreview}}" />
+            <image src="{{imgUrl+pressureImgPath}}" class="img" data-preview="{{imgUrl+pressureImgPath}}" bindtap="preview" wx:elif="{{pressureImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="pressureImgPathPreview" data-tag="pressureImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <!-- U型压力计 -->
+      <block wx:elif="{{airSealType==0}}">
+        <view class="row add">
+          <view class="label">归零照片：</view>
+          <view class="img_group">
+            <image src="{{zeroImgPathPreview}}" class="img" data-preview="{{zeroImgPathPreview}}" bindtap="preview" wx:if="{{zeroImgPathPreview}}" />
+            <image src="{{imgUrl+zeroImgPath}}" class="img" data-preview="{{imgUrl+zeroImgPath}}" bindtap="preview" wx:elif="{{zeroImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="zeroImgPathPreview" data-tag="zeroImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row add">
+          <view class="label">测压前：</view>
+          <view class="img_group">
+            <image src="{{agoPressureImgPathPreview}}" class="img" data-preview="{{agoPressureImgPathPreview}}" bindtap="preview" wx:if="{{agoPressureImgPathPreview}}" />
+            <image src="{{imgUrl+agoPressureImgPath}}" class="img" data-preview="{{imgUrl+agoPressureImgPath}}" bindtap="preview" wx:elif="{{agoPressureImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="agoPressureImgPathPreview" data-tag="agoPressureImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+        <view class="row add">
+          <view class="label">测压后：</view>
+          <view class="img_group">
+            <image src="{{laterPressureImgPathPreview}}" class="img" data-preview="{{laterPressureImgPathPreview}}" bindtap="preview" wx:if="{{laterPressureImgPathPreview}}" />
+            <image src="{{imgUrl+laterPressureImgPath}}" class="img" data-preview="{{imgUrl+laterPressureImgPath}}" bindtap="preview" wx:elif="{{laterPressureImgPath}}" />
+            <image src="../../assets/images/img.png" class="img" wx:else />
+            <image src="../../assets/images/addImg.svg" class="add_img" data-preview="laterPressureImgPathPreview" data-tag="laterPressureImgPath" bindtap="takePictures" />
+          </view>
+        </view>
+      </block>
+      <view class="row">
+        <view class="label">测压结果：</view>
+        <van-radio-group value="{{ isPressure }}" data-tag="isPressure" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ isPressure }}" name="0">
+            <image slot="icon" src="{{ isPressure ==0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">合格</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ isPressure }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ isPressure ==1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">不合格</view>
+          </van-radio>
+        </van-radio-group>
+        <view class="badge">*</view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="section">
+    <van-collapse-item title="用户签字" name="4">
+      <view class="row">
+        <view class="label">用户签字：</view>
+        <navigator class="navigator_btn" hover-class="none" url="../canvas/index?type=signImgPath">
+          点击签字
+        </navigator>
+      </view>
+      <view class="row add" wx:if="{{signImgPath}}">
+        <view class="label"></view>
+        <view class="img_group">
+          <image src="{{ signImgPathPreview[0] || imgUrl+signImgPath}}" class="img" data-preview="{{signImgPathPreview || imgUrl+signImgPath}}" bindtap="preview" />
+        </view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="section">
+    <van-collapse-item title="物品材料" name="5">
+      <view class="row">
+        <view class="label">材料名称：</view>
+        <input class="value" disabled="{{true}}" value="{{materialName}}" placeholder="请选择材料" />
+        <image class="icon" src="../../assets/images/add_icon.svg" data-tag="confirm" bindtap="popupShow" />
+      </view>
+      <view wx:for="{{tbusMaterialUseLogListBean }}">
+        <view class="row">
+          <view class="remove" data-idx="{{index}}" bindtap="deleteMaterial">删除</view>
+          <view class="name">{{item.materialName}}</view>
+        </view>
+        <view class="row add">
+          <view class="label">材料数量：</view>
+          <input class="value" value="{{item.useNum}}" type='number' data-idx="{{index}}" placeholder="请输入材料数量" bindblur="useNumChange" />
+        </view>
+        <view class="row add">
+          <view class="label">是否收费：</view>
+          <van-radio-group value="{{ item.materialType }}" data-idx="{{index}}" bind:change="changeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ item.materialType  }}" name="1">
+              <image slot="icon" src="{{ item.materialType  ==1? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">是</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ item.materialType  }}" name="0" style="margin-left:20rpx">
+              <image slot="icon" src="{{ item.materialType  ==0? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text">否</view>
+            </van-radio>
+          </van-radio-group>
+          <view class="badge">*</view>
+        </view>
+        <view class="row add">
+          <view class="radio_text">单价：{{item.price}}</view>
+          <view class="radio_text" style="margin-left:200rpx;">合计：{{item.totalPrice}}</view>
+        </view>
+      </view>
+      <block wx:if="{{materialName.length}}">
+        <view class="row add">
+          <view class="label">缴费方式：</view>
+          <picker mode="selector" value="{{payType}}" range="{{payment_methodArr}}" range-key="dictNm" data-tag="payType" data-name="payTypeNm" data-range="payment_methodArr" bindchange="selectChange">
+            <view class="value">{{payTypeNm.length?payTypeNm:'请选择缴费方式'}}</view>
+          </picker>
+        </view>
+        <view class="row add">
+          <view class="label">收费票据号：</view>
+          <input class="value" value="{{noteNum}}" data-tag="noteNum" placeholder="请输入收费票据号" bindinput="inputChange" />
+        </view>
+      </block>
+    </van-collapse-item>
+  </view>
+  <view class="btn_container">
+    <view class="btn" bindtap="submitOrder">下一步</view>
+  </view>
+</van-collapse>
+<van-popup show="{{ show }}" position="bottom" custom-style="height: 40%;" round bind:close="popupShow">
+  <view class="popup_title">
+    <view class="text" data-tag="cancel" bindtap="popupShow">取消</view>
+    <view class="text confirm" data-tag="confirm" bindtap="popupShow">确定</view>
+  </view>
+  <van-checkbox-group value="{{ result }}" bind:change="checkChange">
+    <van-cell-group>
+      <van-cell wx:for="{{ materialList }}" wx:key="index" title="{{ item.materialName }}" value-class="value-class" clickable data-index="{{ index }}" bind:click="toggle">
+        <van-checkbox catch:tap="noop" class="checkboxes-{{ index }}" name="{{ index }}" />
+      </van-cell>
+    </van-cell-group>
+  </van-checkbox-group>
+</van-popup>

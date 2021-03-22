@@ -1,0 +1,8 @@
+<view class="navigate bg_white bg_shadow" style="height:{{statusBarHeight+44}}px">
+  <view class="status" style="height:{{statusBarHeight}}px"></view>
+  <view class="navigate_info">
+    <image class="status_left" wx:if="{{iconShow}}" src="../../image/left_icon.svg" bindtap="toBack" />
+    <view class="title">{{title}}</view>
+  </view>
+</view>
+<view style="height:{{statusBarHeight+50}}px"></view>

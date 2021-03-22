@@ -1,0 +1,132 @@
+page {
+  background: #FBFBFB;
+}
+
+.tab_container {
+  padding: 24rpx 0 20rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.tab_container .tab_item {
+
+  position: relative;
+  padding-bottom: 4rpx;
+  font-size: 36rpx;
+  color: #101010;
+}
+
+.tab_container .tab_item::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10rpx;
+  background: #E5E5EA;
+}
+
+.tab_container .tab_item:first-child {
+  padding-right: 20rpx;
+}
+
+.tab_container .tab_item:last-child {
+  padding-left: 20rpx;
+}
+
+.tab_container .tab_item:nth-child(2) {
+  padding: 0 20rpx 4rpx;
+}
+
+.tab_container .tab_item:first-child::after {
+  border-radius: 20rpx 0 0 20rpx;
+}
+
+.tab_container .tab_item:last-child::after {
+  border-radius: 0 20rpx 20rpx 0;
+}
+
+.tab_container .tab_item.active::after {
+
+  background: #5AC8FA;
+}
+
+.search_container {
+  position: relative;
+  padding: 20rpx 30rpx;
+  background: #F2F2F2;
+}
+
+.search_container .icon {
+  position: absolute;
+  top: 50%;
+  left: 44rpx;
+  transform: translateY(-50%);
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.search_container .input {
+  padding-left: 50rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  background: #fff;
+}
+
+.list {
+  padding: 30rpx 40rpx;
+}
+
+.list .item {
+  margin-bottom: 30rpx;
+  padding: 24rpx 40rpx;
+  border-radius: 20rpx;
+  background: #fff;
+  box-shadow: 0 4rpx 12rpx 0 rgba(000, 000, 000, .4);
+}
+
+.list .item .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #101010;
+}
+
+.list .item .subtitle {
+  margin-top: 15rpx;
+  display: flex;
+  align-items: center;
+
+}
+
+.list .item .subtitle .text {
+  font-size: 28rpx;
+
+  color: #FF3A30;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+
+.list .item .subtitle .date {
+  margin-left: 30rpx;
+  flex-shrink: 0;
+  font-size: 24rpx;
+  color: #8A8A8A;
+}
+
+.list .item .detail {
+  margin-top: 15rpx;
+  font-size: 28rpx;
+  color: #AEAEB2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

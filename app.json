@@ -1,0 +1,77 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/orderSporadic/index",
+    "pages/orderDetail/index",
+    "pages/login/index",
+    "pages/canvas/index",
+    "pages/checkDanger/index",
+    "pages/checkInDoor/index",
+    "pages/orderCheck/index",
+    "pages/orderSwap/index",
+    "pages/orderFollow/index",
+    "pages/orderPublic/index",
+    "pages/orderDebug/index",
+    "pages/orderChange/index",
+    "pages/workOrder/index",
+    "pages/customer/index",
+    "pages/my/index",
+    "pages/orderList/index",
+    "pages/orderBasics/index",
+    "pages/addUser/index",
+    "pages/query/index",
+    "pages/orderDanger/index",
+    "pages/query/danger",
+    "pages/query/sporadic",
+    "pages/query/group"
+  ],
+  "usingComponents": {
+    "van-icon": "component/icon/index",
+    "van-button": "component/button/index",
+    "tab-bar": "component/customTabBar/index"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8E8E93",
+    "backgroundColor": "#FFFFFF",
+    "selectedColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/assets/icon/index_icon.png",
+        "selectedIconPath": "/assets/icon/index_icon_active.png"
+      },
+      {
+        "pagePath": "pages/workOrder/index",
+        "iconPath": "/assets/icon/order_icon.png",
+        "selectedIconPath": "/assets/icon/order_icon_active.png"
+      },
+      {
+        "pagePath": "pages/customer/index",
+        "iconPath": "/assets/icon/user_icon.png",
+        "selectedIconPath": "/assets/icon/user_icon_active.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "/assets/icon/mine_icon.png",
+        "selectedIconPath": "/assets/icon/mine_icon_active.png"
+      }
+    ],
+    "position": "bottom"
+  },
+  "window": {
+    "navigationStyle": "default",
+    "navigationBarTitleText": "艾嘉云安检",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light"
+  },
+  "sitemapLocation": "sitemap.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+}

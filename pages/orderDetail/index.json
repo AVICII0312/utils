@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "基础信息",
+  "usingComponents": {
+    "van-collapse": "/component/collapse/index",
+    "van-collapse-item": "/component/collapse-item/index"
+  }
+}

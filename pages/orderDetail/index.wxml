@@ -1,0 +1,141 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section" wx:if="{{type==='Danger' }}">
+    <van-collapse-item title="用户信息" name="1">
+      <view class="row">
+        <view class="label">户号：</view>
+        <view class="value">{{cusNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">客户姓名：</view>
+        <view class="value">{{customerName}}</view>
+      </view>
+      <view class="row">
+        <view class="label">客户地址：</view>
+        <view class="value">{{customerAddress}}</view>
+      </view>
+      <view class="row">
+        <view class="label">联系电话：</view>
+        <view class="value">{{customerPhone}}</view>
+      </view>
+      <view class="row">
+        <view class="label">调压箱号：</view>
+        <view class="value">{{pressureBoxNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">表箱号：</view>
+        <view class="value">{{meterBoxNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">表具编号：</view>
+        <view class="value">{{meterNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">隐患分类：</view>
+        <view class="value">{{dangerOfName}}</view>
+      </view>
+      <view class="row">
+        <view class="label">隐患描述：</view>
+        <view class="value">{{dangerName}}</view>
+      </view>
+      <view class="row">
+        <view class="label" style="flex:1;">隐患照片：</view>
+      </view>
+      <image class="video_play" src="{{imgUrl+dangerImgPath}}" />
+    </van-collapse-item>
+  </view>
+  <view class="section" wx:elif="{{type==='Group' }}">
+    <van-collapse-item title="用户信息" name="1">
+      <view class="row">
+        <view class="label">户号：</view>
+        <view class="value">{{cusNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">客户姓名：</view>
+        <view class="value">{{cusName}}</view>
+      </view>
+      <view class="row">
+        <view class="label">客户地址：</view>
+        <view class="value">{{address}}</view>
+      </view>
+      <view class="row">
+        <view class="label">联系电话：</view>
+        <view class="value">{{phone}}</view>
+      </view>
+      <view class="row">
+        <view class="label">调压箱号：</view>
+        <view class="value">{{pressureBoxNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">表箱号：</view>
+        <view class="value">{{meterBoxNum}}</view>
+      </view>
+      <view class="row">
+        <view class="label">表具编号：</view>
+        <view class="value">{{meterNum}}</view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <block wx:else>
+    <view class="section">
+      <van-collapse-item title="用户信息" name="1">
+        <view class="row">
+          <view class="label">客户姓名：</view>
+          <view class="value">{{cusName}}</view>
+        </view>
+        <view class="row">
+          <view class="label">客户地址：</view>
+          <view class="value">{{address}}</view>
+        </view>
+        <view class="row">
+          <view class="label">联系电话：</view>
+          <view class="value">{{phone}}</view>
+        </view>
+        <view class="row">
+          <view class="label">身份证号：</view>
+          <view class="value">{{idCard}}</view>
+        </view>
+        <view class="row">
+          <view class="label">单据编号：</view>
+          <view class="value">{{orderNum}}</view>
+        </view>
+        <view class="row">
+          <view class="label">表具编号：</view>
+          <view class="value">{{meterNum}}</view>
+        </view>
+        <view class="row">
+          <view class="label">用户类型：</view>
+          <view class="value">{{useTypeName}}</view>
+        </view>
+      </van-collapse-item>
+    </view>
+    <view class="section">
+      <van-collapse-item title="诉求信息" name="2">
+        <view class="row">
+          <view class="label">状态：</view>
+          <view class="value">{{repairStateName}}</view>
+        </view>
+        <view class="row">
+          <view class="label">业务类型：</view>
+          <view class="value">{{repairTypeName}}</view>
+        </view>
+        <view class="row">
+          <view class="label">预约时间：</view>
+          <view class="value">{{makeTime}}</view>
+        </view>
+        <view class="row">
+          <view class="label">紧急程度：</view>
+          <view class="value">{{isHurryName}}</view>
+        </view>
+        <view class="row">
+          <view class="label">建单时间：</view>
+          <view class="value">{{createTime}}</view>
+        </view>
+        <view class="row">
+          <view class="label">创建人：</view>
+          <view class="value">{{createUserIdName}}</view>
+        </view>
+      </van-collapse-item>
+    </view>
+  </block>
+  <view class="btn" bindtap="getOrder">领取工单</view>
+</van-collapse>

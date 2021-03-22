@@ -1,0 +1,109 @@
+<van-collapse accordion value="{{ activeName }}" custom-class="container" content-class="title" bind:change="onChange">
+  <view class="section">
+    <van-collapse-item title="维修单" name="1">
+      <view class="row">
+        <view class="row_title">维修前拍照</view>
+      </view>
+      <view class="row">
+        <view class="label">维修前拍照：</view>
+        <view class="img_group">
+          <image src="{{mBeforeImgPathPreview}}" class="img" data-preview="{{mBeforeImgPathPreview}}" bindtap="preview" wx:if="{{mBeforeImgPathPreview}}" />
+          <image src="{{imgUrl+mBeforeImgPath}}" class="img" data-preview="{{imgUrl+mBeforeImgPath}}" bindtap="preview" wx:elif="{{mBeforeImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="mBeforeImgPathPreview" data-tag="mBeforeImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="row_title">维修信息</view>
+      </view>
+      <view class="row">
+        <view class="label">维修项目：</view>
+        <picker mode="selector" value="{{mMaintainType}}" range="{{maintenance_itemsArr}}" range-key="dictNm" data-tag="mMaintainType" data-name="mMaintainTypeNm" data-range="maintenance_itemsArr" bindchange="selectChange">
+          <view class="value">{{mMaintainTypeNm.length?mMaintainTypeNm:'请选择维修项目'}}</view>
+        </picker>
+        <view class="badge">*</view>
+      </view>
+      <view class="row">
+        <view class="row_title">表具资料核对</view>
+      </view>
+      <view class="row">
+        <view class="label">表具编号：</view>
+        <input class="value" placeholder="请输入表具编号" data-tag="mMeterNum" value="{{mMeterNum}}" bindinput="inputChange" />
+        <view class="badge">*</view>
+        <image class="icon" src="../../assets/images/scan.png" data-tag="mMeterNum" bindtap="takeCode" />
+      </view>
+      <view class="row">
+        <view class="label">表具照片：</view>
+        <view class="img_group">
+          <image src="{{mMeterImgPathPreview}}" class="img" data-preview="{{mMeterImgPathPreview}}" bindtap="preview" wx:if="{{mMeterImgPathPreview}}" />
+          <image src="{{imgUrl+mMeterImgPath}}" class="img" data-preview="{{imgUrl+mMeterImgPath}}" bindtap="preview" wx:elif="{{mMeterImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="mMeterImgPathPreview" data-tag="mMeterImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">是否确认用户：</view>
+        <van-radio-group value="{{ mIsAffirm }}" data-tag="mIsAffirm" bind:change="onChangeRadio" class="radio_container">
+          <van-radio use-icon-slot value="{{ mIsAffirm }}" name="0">
+            <image slot="icon" src="{{ mIsAffirm == 0 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">是</view>
+          </van-radio>
+          <van-radio use-icon-slot value="{{ mIsAffirm }}" name="1" style="margin-left:20rpx">
+            <image slot="icon" src="{{ mIsAffirm == 1 ? icon.active : icon.normal }}" class="radio_icon" />
+            <view class="radio_text">否</view>
+          </van-radio>
+        </van-radio-group>
+      </view>
+      <view class="row">
+        <view class="row_title">完成情况</view>
+      </view>
+      <view class="row">
+        <view class="label">是否完成：</view>
+        <view class="img_group">
+          <van-radio-group value="{{ mIsComplete }}" data-tag="mIsComplete" bind:change="onChangeRadio" class="radio_container">
+            <van-radio use-icon-slot value="{{ mIsComplete }}" name="0">
+              <image slot="icon" src="{{ mIsComplete ==0 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text" style="width:110rpx">处理完毕</view>
+            </van-radio>
+            <van-radio use-icon-slot value="{{ mIsComplete }}" name="1" style="margin-left:20rpx">
+              <image slot="icon" src="{{ mIsComplete ==1 ? icon.active : icon.normal }}" class="radio_icon" />
+              <view class="radio_text" style="width:160rpx">未完成需跟进</view>
+            </van-radio>
+          </van-radio-group>
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">备注：</view>
+        <input class="value" placeholder="请输入备注信息" data-tag="mRemark" value="{{mRemark}}" bindinput="inputChange" />
+      </view>
+      <view class="row">
+        <view class="row_title">维修后拍照</view>
+      </view>
+      <view class="row">
+        <view class="label">维修后拍照：</view>
+        <view class="img_group">
+          <image src="{{mLastImgPathPreview}}" class="img" data-preview="{{mLastImgPathPreview}}" bindtap="preview" wx:if="{{mLastImgPathPreview}}" />
+          <image src="{{imgUrl+mLastImgPath}}" class="img" data-preview="{{imgUrl+mLastImgPath}}" bindtap="preview" wx:elif="{{mLastImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="mLastImgPathPreview" data-tag="mLastImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+      <view class="row">
+        <view class="label">单据照片：</view>
+        <view class="img_group">
+          <image src="{{mBillsImgPathPreview}}" class="img" data-preview="{{mBillsImgPathPreview}}" bindtap="preview" wx:if="{{mBillsImgPathPreview}}" />
+          <image src="{{imgUrl+mBillsImgPath}}" class="img" data-preview="{{imgUrl+mBillsImgPath}}" bindtap="preview" wx:elif="{{mBillsImgPath}}" />
+          <image src="../../assets/images/img.png" class="img" wx:else />
+          <image src="../../assets/images/addImg.svg" class="add_img" data-preview="mBillsImgPathPreview" data-tag="mBillsImgPath" bindtap="takePictures" />
+        </view>
+      </view>
+    </van-collapse-item>
+  </view>
+  <view class="btn_container">
+    <view class="btn save" data-tag="save" bindtap="submitOrder" wx:if="{{nextStep}}">下一步</view>
+    <block wx:else>
+      <view class="btn save" data-tag="save" bindtap="submitOrder">暂存工单</view>
+      <view class="btn" data-tag="submit" bindtap="submitOrder">提交工单</view>
+    </block>
+  </view>
+</van-collapse>

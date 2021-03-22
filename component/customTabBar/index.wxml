@@ -1,0 +1,5 @@
+<cover-view class="container">
+  <cover-image class="item" wx:for="{{list}}" wx:key="index" src="{{selected==index?item.selectedIcon:item.icon}}"
+    data-path="{{item.path}}" data-index="{{index}}" bindtap="switchTab">
+  </cover-image>
+</cover-view>

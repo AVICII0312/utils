@@ -1,0 +1,18 @@
+<!--index.wxml-->
+<view class="container">
+  <image class="container_bg" src="../../assets/images/order_img.png" />
+  <image class="container_img" src="../../assets/images/login_img.png" />
+  <view class="title">艾嘉云安检</view>
+</view>
+<view class="form">
+  <view class="row">
+    <view class="label">用户名</view>
+    <input class="input" placeholder="请输入用户名" model:value="{{username}}" />
+  </view>
+  <view class="row">
+    <view class="label">密码</view>
+    <input class="input" placeholder="请输入密码" model:value="{{password}}" />
+  </view>
+</view>
+<view class="btn" bindtap="login">立即登录</view>
+<view class="tip">版权编号</view>
